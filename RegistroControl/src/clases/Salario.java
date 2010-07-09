@@ -5,6 +5,8 @@
 
 package clases;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
@@ -20,6 +22,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 /**
  *
@@ -44,6 +47,8 @@ import javax.persistence.TemporalType;
     @NamedQuery(name = "Salario.findByPrimas", query = "SELECT s FROM Salario s WHERE s.primas = :primas"),
     @NamedQuery(name = "Salario.findByBonificaciones", query = "SELECT s FROM Salario s WHERE s.bonificaciones = :bonificaciones")})
 public class Salario implements Serializable {
+    @Transient
+    private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -123,7 +128,9 @@ public class Salario implements Serializable {
     }
 
     public void setIdsalario(Integer idsalario) {
+        Integer oldIdsalario = this.idsalario;
         this.idsalario = idsalario;
+        changeSupport.firePropertyChange("idsalario", oldIdsalario, idsalario);
     }
 
     public Date getFecha() {
@@ -131,7 +138,9 @@ public class Salario implements Serializable {
     }
 
     public void setFecha(Date fecha) {
+        Date oldFecha = this.fecha;
         this.fecha = fecha;
+        changeSupport.firePropertyChange("fecha", oldFecha, fecha);
     }
 
     public int getValorBruto() {
@@ -139,7 +148,9 @@ public class Salario implements Serializable {
     }
 
     public void setValorBruto(int valorBruto) {
+        int oldValorBruto = this.valorBruto;
         this.valorBruto = valorBruto;
+        changeSupport.firePropertyChange("valorBruto", oldValorBruto, valorBruto);
     }
 
     public int getValorNeto() {
@@ -147,7 +158,9 @@ public class Salario implements Serializable {
     }
 
     public void setValorNeto(int valorNeto) {
+        int oldValorNeto = this.valorNeto;
         this.valorNeto = valorNeto;
+        changeSupport.firePropertyChange("valorNeto", oldValorNeto, valorNeto);
     }
 
     public int getSalud() {
@@ -155,7 +168,9 @@ public class Salario implements Serializable {
     }
 
     public void setSalud(int salud) {
+        int oldSalud = this.salud;
         this.salud = salud;
+        changeSupport.firePropertyChange("salud", oldSalud, salud);
     }
 
     public int getPension() {
@@ -163,7 +178,9 @@ public class Salario implements Serializable {
     }
 
     public void setPension(int pension) {
+        int oldPension = this.pension;
         this.pension = pension;
+        changeSupport.firePropertyChange("pension", oldPension, pension);
     }
 
     public int getAccionJudicial() {
@@ -171,7 +188,9 @@ public class Salario implements Serializable {
     }
 
     public void setAccionJudicial(int accionJudicial) {
+        int oldAccionJudicial = this.accionJudicial;
         this.accionJudicial = accionJudicial;
+        changeSupport.firePropertyChange("accionJudicial", oldAccionJudicial, accionJudicial);
     }
 
     public int getCooperativa() {
@@ -179,7 +198,9 @@ public class Salario implements Serializable {
     }
 
     public void setCooperativa(int cooperativa) {
+        int oldCooperativa = this.cooperativa;
         this.cooperativa = cooperativa;
+        changeSupport.firePropertyChange("cooperativa", oldCooperativa, cooperativa);
     }
 
     public int getPrestaciones() {
@@ -187,7 +208,9 @@ public class Salario implements Serializable {
     }
 
     public void setPrestaciones(int prestaciones) {
+        int oldPrestaciones = this.prestaciones;
         this.prestaciones = prestaciones;
+        changeSupport.firePropertyChange("prestaciones", oldPrestaciones, prestaciones);
     }
 
     public int getExtras() {
@@ -195,7 +218,9 @@ public class Salario implements Serializable {
     }
 
     public void setExtras(int extras) {
+        int oldExtras = this.extras;
         this.extras = extras;
+        changeSupport.firePropertyChange("extras", oldExtras, extras);
     }
 
     public int getAdicionales() {
@@ -203,7 +228,9 @@ public class Salario implements Serializable {
     }
 
     public void setAdicionales(int adicionales) {
+        int oldAdicionales = this.adicionales;
         this.adicionales = adicionales;
+        changeSupport.firePropertyChange("adicionales", oldAdicionales, adicionales);
     }
 
     public int getCesantias() {
@@ -211,7 +238,9 @@ public class Salario implements Serializable {
     }
 
     public void setCesantias(int cesantias) {
+        int oldCesantias = this.cesantias;
         this.cesantias = cesantias;
+        changeSupport.firePropertyChange("cesantias", oldCesantias, cesantias);
     }
 
     public int getPrimas() {
@@ -219,7 +248,9 @@ public class Salario implements Serializable {
     }
 
     public void setPrimas(int primas) {
+        int oldPrimas = this.primas;
         this.primas = primas;
+        changeSupport.firePropertyChange("primas", oldPrimas, primas);
     }
 
     public int getBonificaciones() {
@@ -227,7 +258,9 @@ public class Salario implements Serializable {
     }
 
     public void setBonificaciones(int bonificaciones) {
+        int oldBonificaciones = this.bonificaciones;
         this.bonificaciones = bonificaciones;
+        changeSupport.firePropertyChange("bonificaciones", oldBonificaciones, bonificaciones);
     }
 
     public Empleado getEmpleado() {
@@ -235,7 +268,9 @@ public class Salario implements Serializable {
     }
 
     public void setEmpleado(Empleado empleado) {
+        Empleado oldEmpleado = this.empleado;
         this.empleado = empleado;
+        changeSupport.firePropertyChange("empleado", oldEmpleado, empleado);
     }
 
     @Override
@@ -261,6 +296,14 @@ public class Salario implements Serializable {
     @Override
     public String toString() {
         return "registrocontrol.clases.Salario[idsalario=" + idsalario + "]";
+    }
+
+    public void addPropertyChangeListener(PropertyChangeListener listener) {
+        changeSupport.addPropertyChangeListener(listener);
+    }
+
+    public void removePropertyChangeListener(PropertyChangeListener listener) {
+        changeSupport.removePropertyChangeListener(listener);
     }
 
 }

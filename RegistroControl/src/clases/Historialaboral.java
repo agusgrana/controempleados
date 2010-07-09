@@ -5,6 +5,8 @@
 
 package clases;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
@@ -20,6 +22,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 /**
  *
@@ -36,6 +39,8 @@ import javax.persistence.TemporalType;
     @NamedQuery(name = "Historialaboral.findBySalarioBase", query = "SELECT h FROM Historialaboral h WHERE h.salarioBase = :salarioBase"),
     @NamedQuery(name = "Historialaboral.findByValorHoraExtra", query = "SELECT h FROM Historialaboral h WHERE h.valorHoraExtra = :valorHoraExtra")})
 public class Historialaboral implements Serializable {
+    @Transient
+    private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -84,7 +89,9 @@ public class Historialaboral implements Serializable {
     }
 
     public void setIdHistoriaLaboral(Integer idHistoriaLaboral) {
+        Integer oldIdHistoriaLaboral = this.idHistoriaLaboral;
         this.idHistoriaLaboral = idHistoriaLaboral;
+        changeSupport.firePropertyChange("idHistoriaLaboral", oldIdHistoriaLaboral, idHistoriaLaboral);
     }
 
     public String getCargo() {
@@ -92,7 +99,9 @@ public class Historialaboral implements Serializable {
     }
 
     public void setCargo(String cargo) {
+        String oldCargo = this.cargo;
         this.cargo = cargo;
+        changeSupport.firePropertyChange("cargo", oldCargo, cargo);
     }
 
     public Date getFechaInicio() {
@@ -100,7 +109,9 @@ public class Historialaboral implements Serializable {
     }
 
     public void setFechaInicio(Date fechaInicio) {
+        Date oldFechaInicio = this.fechaInicio;
         this.fechaInicio = fechaInicio;
+        changeSupport.firePropertyChange("fechaInicio", oldFechaInicio, fechaInicio);
     }
 
     public Date getFechaSalida() {
@@ -108,7 +119,9 @@ public class Historialaboral implements Serializable {
     }
 
     public void setFechaSalida(Date fechaSalida) {
+        Date oldFechaSalida = this.fechaSalida;
         this.fechaSalida = fechaSalida;
+        changeSupport.firePropertyChange("fechaSalida", oldFechaSalida, fechaSalida);
     }
 
     public int getSalarioBase() {
@@ -116,7 +129,9 @@ public class Historialaboral implements Serializable {
     }
 
     public void setSalarioBase(int salarioBase) {
+        int oldSalarioBase = this.salarioBase;
         this.salarioBase = salarioBase;
+        changeSupport.firePropertyChange("salarioBase", oldSalarioBase, salarioBase);
     }
 
     public int getValorHoraExtra() {
@@ -124,7 +139,9 @@ public class Historialaboral implements Serializable {
     }
 
     public void setValorHoraExtra(int valorHoraExtra) {
+        int oldValorHoraExtra = this.valorHoraExtra;
         this.valorHoraExtra = valorHoraExtra;
+        changeSupport.firePropertyChange("valorHoraExtra", oldValorHoraExtra, valorHoraExtra);
     }
 
     public Empleado getEmpleado() {
@@ -132,7 +149,9 @@ public class Historialaboral implements Serializable {
     }
 
     public void setEmpleado(Empleado empleado) {
+        Empleado oldEmpleado = this.empleado;
         this.empleado = empleado;
+        changeSupport.firePropertyChange("empleado", oldEmpleado, empleado);
     }
 
     @Override
@@ -158,6 +177,14 @@ public class Historialaboral implements Serializable {
     @Override
     public String toString() {
         return "registrocontrol.clases.Historialaboral[idHistoriaLaboral=" + idHistoriaLaboral + "]";
+    }
+
+    public void addPropertyChangeListener(PropertyChangeListener listener) {
+        changeSupport.addPropertyChangeListener(listener);
+    }
+
+    public void removePropertyChangeListener(PropertyChangeListener listener) {
+        changeSupport.removePropertyChangeListener(listener);
     }
 
 }
