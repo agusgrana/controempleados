@@ -13,7 +13,7 @@ package registrocontrol;
 
 import javax.swing.JOptionPane;
 import clases.Vinculacion;
-import javax.swing.table.TableModel;
+
 
 
 /**
@@ -59,6 +59,7 @@ public class PanelVinculacion extends javax.swing.JPanel {
         jScrollPane1.setName("jScrollPane1"); // NOI18N
 
         tablaVincu.setName("tablaVincu"); // NOI18N
+        tablaVincu.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
         org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, vinculacionList, tablaVincu);
         org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${descripcion}"));
