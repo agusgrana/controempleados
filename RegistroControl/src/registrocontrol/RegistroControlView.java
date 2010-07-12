@@ -13,6 +13,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.Timer;
 import javax.swing.Icon;
+import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -22,7 +23,7 @@ import javax.swing.JPanel;
  */
 public class RegistroControlView extends FrameView {
 
-    JPanel principal;
+    public JPanel principal;
 
     public RegistroControlView(SingleFrameApplication app) {
         super(app);
@@ -144,7 +145,7 @@ public class RegistroControlView extends FrameView {
         );
         mainPanelLayout.setVerticalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 249, Short.MAX_VALUE)
+            .addGap(0, 254, Short.MAX_VALUE)
         );
 
         menuBar.setName("menuBar"); // NOI18N
@@ -235,8 +236,14 @@ public class RegistroControlView extends FrameView {
         });
         jMenu1.add(jMenuItem8);
 
+        jMenu4.setText(resourceMap.getString("jMenu4.text")); // NOI18N
+
         jMenuItem4.setText(resourceMap.getString("jMenuItem4.text")); // NOI18N
-        jMenuItem4.setName("jMenuItem4"); // NOI18N
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
         jMenu4.add(jMenuItem4);
 
         jMenuItem3.setText(resourceMap.getString("jMenuItem3.text")); // NOI18N
@@ -318,53 +325,48 @@ public class RegistroControlView extends FrameView {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        principal.removeAll();
-        principal.setVisible(false);
-        principal.add(new PanelVinculacion());
-        principal.setVisible(true);
+
+        cambiarPanelPrincipal(new PanelVinculacion());
+        
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        principal.removeAll();
-        principal.setVisible(false);
-        principal.add(new PanelListaHorarios());
-        principal.setVisible(true);
+
+       cambiarPanelPrincipal(new PanelListaHorarios(this));
+
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-        principal.removeAll();
-        principal.setVisible(false);
-        principal.add(new PanelEmpleados());
-        principal.setVisible(true);
+
+        cambiarPanelPrincipal(new PanelEmpleados());
+
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
-principal.removeAll();
-        principal.setVisible(false);
-        principal.add(new PanelHistoLaboral());
-        principal.setVisible(true);
+
+        cambiarPanelPrincipal(new PanelHistoLaboral());
+
     }//GEN-LAST:event_jMenuItem11ActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
-principal.removeAll();
-        principal.setVisible(false);
-        principal.add(new PanelFamiliar());
-        principal.setVisible(true);
+
+        cambiarPanelPrincipal(new PanelFamiliar());
+
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
-principal.removeAll();
-        principal.setVisible(false);
-        principal.add(new PanelSalario());
-        principal.setVisible(true);
+
+        cambiarPanelPrincipal(new PanelSalario());
+
     }//GEN-LAST:event_jMenuItem12ActionPerformed
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
-principal.removeAll();
-        principal.setVisible(false);
-        principal.add(new PanelAnomalias());
-        principal.setVisible(true);
+        cambiarPanelPrincipal(new PanelAnomalias());
     }//GEN-LAST:event_jMenuItem8ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        new VentanaNuevoHorario();
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu1;
@@ -391,6 +393,15 @@ principal.removeAll();
     private javax.swing.JLabel statusMessageLabel;
     private javax.swing.JPanel statusPanel;
     // End of variables declaration//GEN-END:variables
+
+
+    public void cambiarPanelPrincipal(JComponent elemento)
+    {
+        principal.removeAll();
+        principal.setVisible(false);
+        principal.add(elemento);
+        principal.setVisible(true);
+    }
 
     private final Timer messageTimer;
     private final Timer busyIconTimer;
