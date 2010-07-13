@@ -11,6 +11,7 @@
 
 package registrocontrol;
 
+import registrocontrol.lib.Mensajes;
 import clases.Horario;
 import java.awt.Color;
 import java.awt.Component;
@@ -44,8 +45,8 @@ public class PanelListaHorarios extends javax.swing.JPanel {
         bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(registrocontrol.RegistroControlApp.class).getContext().getResourceMap(PanelListaHorarios.class);
-        RPUEntityManager = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory(resourceMap.getString("RPUEntityManager.persistenceUnit")).createEntityManager(); // NOI18N
-        horarioQuery = java.beans.Beans.isDesignTime() ? null : RPUEntityManager.createQuery("SELECT h FROM Horario h");
+        entityManager = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory(resourceMap.getString("entityManager.persistenceUnit")).createEntityManager(); // NOI18N
+        horarioQuery = java.beans.Beans.isDesignTime() ? null : entityManager.createQuery("SELECT h FROM Horario h");
         horarioList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : horarioQuery.getResultList();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -164,7 +165,7 @@ public class PanelListaHorarios extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        new VentanaNuevoHorario();
+        new VentanaNuevoHorario(entityManager);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -178,9 +179,9 @@ public class PanelListaHorarios extends javax.swing.JPanel {
             try{
                 Horario horario = horarioList.get(jTable1.getSelectedRow());
                 horarioList.remove(jTable1.getSelectedRow());
-                RPUEntityManager.getTransaction().begin();
-                RPUEntityManager.remove(horario);
-                RPUEntityManager.getTransaction().commit();
+                entityManager.getTransaction().begin();
+                entityManager.remove(horario);
+                entityManager.getTransaction().commit();
                 jTable1.repaint();
             }catch(PersistenceException pe)
             { Mensajes.Error(this, "Error eliminando el horario");}
@@ -194,7 +195,7 @@ public class PanelListaHorarios extends javax.swing.JPanel {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         try{
             Horario horario = horarioList.get(jTable1.getSelectedRow());
-            new VentanaNuevoHorario(horario,RPUEntityManager);
+            new VentanaNuevoHorario(horario,entityManager);
         }catch(ArrayIndexOutOfBoundsException e){
             Mensajes.Error(this, "No ha seleccionado nada");
         }
@@ -202,7 +203,7 @@ public class PanelListaHorarios extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.persistence.EntityManager RPUEntityManager;
+    private javax.persistence.EntityManager entityManager;
     private java.util.List<clases.Horario> horarioList;
     private javax.persistence.Query horarioQuery;
     private javax.swing.JButton jButton1;
