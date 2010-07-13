@@ -11,6 +11,7 @@
 
 package registrocontrol;
 
+import registrocontrol.lib.Mensajes;
 import clases.Horario;
 import java.util.Date;
 import javax.persistence.EntityManager;
@@ -23,22 +24,24 @@ import javax.swing.JTextField;
  */
 public class VentanaNuevoHorario extends javax.swing.JDialog {
 
-    private Horario horario = null;
-    private EntityManager RPUEntityManager = null;
+    private Horario horario;
+    //private boolean nuevo=true;
+    private EntityManager entityManager = null;
     /** Creates new form VentanaNuevoHorario */
-    public VentanaNuevoHorario() {
+    public VentanaNuevoHorario(EntityManager entityManager) {
+        this.entityManager=entityManager;
         initComponents();
         this.setModal(true);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
     }
 
-    public VentanaNuevoHorario(Horario horario,EntityManager RPUEntityManager){
+    public VentanaNuevoHorario(Horario horario,EntityManager entityManager){
         initComponents();
         this.setModal(true);
         this.setLocationRelativeTo(null);
         this.horario=horario;
-        this.RPUEntityManager=RPUEntityManager;
+        this.entityManager=entityManager;
         ponerDatos();
         this.setVisible(true);
     }
@@ -61,7 +64,6 @@ public class VentanaNuevoHorario extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        entityManager = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("RPU").createEntityManager();
         jLabel1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel2 = new javax.swing.JLabel();
@@ -259,16 +261,9 @@ public class VentanaNuevoHorario extends javax.swing.JDialog {
             hora = Integer.parseInt(campoHoraSalida.getText());
             min = Integer.parseInt(campoMinSalida.getText());
             horario.setHoraSalida(new Date(0,0,0,hora,min));
-            if(RPUEntityManager==null)
-            {
-                entityManager.getTransaction().begin();
-                entityManager.persist(horario);
-                entityManager.getTransaction().commit();
-            }
-            else{
-                RPUEntityManager.getTransaction().begin();
-                RPUEntityManager.getTransaction().commit();
-            }
+            entityManager.getTransaction().begin();
+            entityManager.persist(horario);
+            entityManager.getTransaction().commit();
             Mensajes.Ok(this, "El horario se ha guardado satisfactoriamente");
             this.dispose();
             }catch(NumberFormatException ne){
@@ -286,7 +281,6 @@ public class VentanaNuevoHorario extends javax.swing.JDialog {
     private javax.swing.JTextField campoMinEntrada;
     private javax.swing.JTextField campoMinSalida;
     private javax.swing.JTextField campoNombreHorario;
-    private javax.persistence.EntityManager entityManager;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;

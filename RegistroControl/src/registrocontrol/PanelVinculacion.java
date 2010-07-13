@@ -11,8 +11,13 @@
 
 package registrocontrol;
 
-import javax.swing.JOptionPane;
+import java.awt.Component;
 import clases.Vinculacion;
+import javax.persistence.PersistenceException;
+import javax.swing.JCheckBox;
+import javax.swing.JTable;
+import javax.swing.table.TableCellRenderer;
+import registrocontrol.lib.Mensajes;
 
 
 
@@ -22,9 +27,12 @@ import clases.Vinculacion;
  */
 public class PanelVinculacion extends javax.swing.JPanel {
 
+    RegistroControlView registroControlView;
+
     /** Creates new form PanelVinculacion */
-    public PanelVinculacion() {
+    public PanelVinculacion(RegistroControlView registroControlView) {
         initComponents();
+        this.registroControlView=registroControlView;
     }
 
     /** This method is called from within the constructor to
@@ -37,8 +45,8 @@ public class PanelVinculacion extends javax.swing.JPanel {
     private void initComponents() {
         bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
-        RPUEntityManager = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("RPU").createEntityManager();
-        vinculacionQuery = java.beans.Beans.isDesignTime() ? null : RPUEntityManager.createQuery("SELECT v FROM Vinculacion v");
+        entityManager = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("RPU").createEntityManager();
+        vinculacionQuery = java.beans.Beans.isDesignTime() ? null : entityManager.createQuery("SELECT v FROM Vinculacion v");
         vinculacionList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : org.jdesktop.observablecollections.ObservableCollections.observableList(new java.util.LinkedList(vinculacionQuery.getResultList()));
         jLabel1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
@@ -47,6 +55,7 @@ public class PanelVinculacion extends javax.swing.JPanel {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
 
         setName("Form"); // NOI18N
 
@@ -65,10 +74,17 @@ public class PanelVinculacion extends javax.swing.JPanel {
         org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${descripcion}"));
         columnBinding.setColumnName("Descripcion");
         columnBinding.setColumnClass(String.class);
+        columnBinding.setEditable(false);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${prestaciones}"));
+        columnBinding.setColumnName("Prestaciones");
+        columnBinding.setColumnClass(Boolean.class);
+        columnBinding.setEditable(false);
         bindingGroup.addBinding(jTableBinding);
         jTableBinding.bind();
         jScrollPane1.setViewportView(tablaVincu);
-        tablaVincu.getColumnModel().getColumn(0).setHeaderValue(resourceMap.getString("jTable1.columnModel.title1")); // NOI18N
+        tablaVincu.getColumnModel().getColumn(0).setHeaderValue(resourceMap.getString("tablaVincu.columnModel.title1")); // NOI18N
+        tablaVincu.getColumnModel().getColumn(1).setHeaderValue(resourceMap.getString("tablaVincu.columnModel.title2")); // NOI18N
+        tablaVincu.getColumnModel().getColumn(1).setCellRenderer(new RenderPrestaciones());
 
         jButton1.setText(resourceMap.getString("jButton1.text")); // NOI18N
         jButton1.setName("jButton1"); // NOI18N
@@ -94,6 +110,14 @@ public class PanelVinculacion extends javax.swing.JPanel {
             }
         });
 
+        jButton4.setText(resourceMap.getString("jButton4.text")); // NOI18N
+        jButton4.setName("jButton4"); // NOI18N
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -106,7 +130,9 @@ public class PanelVinculacion extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton3))
+                        .addComponent(jButton3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton4))
                     .addComponent(jLabel1)
                     .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 396, Short.MAX_VALUE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 396, Short.MAX_VALUE))
@@ -125,7 +151,8 @@ public class PanelVinculacion extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2)
-                    .addComponent(jButton3))
+                    .addComponent(jButton3)
+                    .addComponent(jButton4))
                 .addContainerGap())
         );
 
@@ -134,75 +161,53 @@ public class PanelVinculacion extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         
-        String nombreVinculacion;
-        do{
-            nombreVinculacion = JOptionPane.showInputDialog("Ingrese el nuevo tipo de Vinculación");
-        }while(nombreVinculacion.isEmpty());
-        Vinculacion vinculacion = new Vinculacion();
-        vinculacion.setDescripcion(nombreVinculacion);
-        vinculacionList.add(vinculacion);
-        RPUEntityManager.getTransaction().begin();
-        RPUEntityManager.persist(vinculacion);
-        RPUEntityManager.getTransaction().commit();
-        
+         new VentanaNuevaVinculacion(entityManager);
 
-
-
-        
-        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         
-        if(JOptionPane.showConfirmDialog(this, "¿Esta seguro que desea Eliminar esa vinculacion?","Confirmar",JOptionPane.OK_OPTION)==JOptionPane.OK_OPTION)
+        if(Mensajes.Confirm(this, "¿Esta seguro que desea eliminar esta Vinculación?"))
         {
             try{
                 Vinculacion vinculacion = vinculacionList.get(tablaVincu.getSelectedRow());
                 vinculacionList.remove(tablaVincu.getSelectedRow());
-                RPUEntityManager.getTransaction().begin();
-                RPUEntityManager.remove(vinculacion);
-                RPUEntityManager.getTransaction().commit();
+                entityManager.getTransaction().begin();
+                entityManager.remove(vinculacion);
+                entityManager.getTransaction().commit();
 
                 
                 
-            }catch(Exception e){
-                JOptionPane.showMessageDialog(this, "No se pudo borrar","Error",JOptionPane.ERROR_MESSAGE);
-                System.out.println(e);
+            }catch(IndexOutOfBoundsException ie){
+                Mensajes.Error(this, "No ha seleccionado ninguna vinculación");
+            }catch(PersistenceException pe){
+                Mensajes.Error(this, "No se pudo eliminar de la base de datos");
             }
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 
-
-            try{
-                Vinculacion vinculacion = vinculacionList.get(tablaVincu.getSelectedRow());
-                String descVinculacion;
-                do{
-                    descVinculacion = JOptionPane.showInputDialog("Ingrese el nuevo nombre:");
-                }while(descVinculacion.isEmpty());
-                vinculacion.setDescripcion(descVinculacion);
-                vinculacionList.set(tablaVincu.getSelectedRow(), vinculacion);
-                RPUEntityManager.getTransaction().begin();
-                
-                RPUEntityManager.getTransaction().commit();
-
-
-
-            }catch(Exception e){
-                JOptionPane.showMessageDialog(this, "No se pudo borrar","Error",JOptionPane.ERROR_MESSAGE);
-                System.out.println(e);
-            }
-
+        try{
+            Vinculacion vinculacion = vinculacionList.get(tablaVincu.getSelectedRow());
+            new VentanaNuevaVinculacion(vinculacion,entityManager);
+        }catch(IndexOutOfBoundsException ae){
+            Mensajes.Error(this, "No ha seleccionado ninguna vinculación");
+        }
 
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+            registroControlView.cambiarPanelPrincipal(new PanelVinculacion(registroControlView));
+    }//GEN-LAST:event_jButton4ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.persistence.EntityManager RPUEntityManager;
+    private javax.persistence.EntityManager entityManager;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
@@ -211,5 +216,18 @@ public class PanelVinculacion extends javax.swing.JPanel {
     private javax.persistence.Query vinculacionQuery;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
+
+
+    class RenderPrestaciones extends JCheckBox implements TableCellRenderer{
+
+        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+            JCheckBox jc = new JCheckBox();
+            boolean valor = (Boolean) value;
+            if(valor)
+                jc.setSelected(true);
+            return jc;
+        }
+
+    }
 
 }

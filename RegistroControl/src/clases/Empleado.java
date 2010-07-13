@@ -5,8 +5,6 @@
 
 package clases;
 
-import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeSupport;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -24,11 +22,10 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.Transient;
 
 /**
  *
- * @author GeRmAn
+ * @author gurzaf
  */
 @Entity
 @Table(name = "empleado")
@@ -43,8 +40,6 @@ import javax.persistence.Transient;
     @NamedQuery(name = "Empleado.findByEmail", query = "SELECT e FROM Empleado e WHERE e.email = :email"),
     @NamedQuery(name = "Empleado.findByTipoSangre", query = "SELECT e FROM Empleado e WHERE e.tipoSangre = :tipoSangre")})
 public class Empleado implements Serializable {
-    @Transient
-    private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -76,21 +71,11 @@ public class Empleado implements Serializable {
     @Lob
     @Column(name = "foto")
     private byte[] foto;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "empleado")
-    private List<Familiar> familiarList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "empleado")
-    private List<Salario> salarioList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "empleado")
-    private List<Turnos> turnosList;
     @JoinColumn(name = "vinculacion", referencedColumnName = "idVinculacion")
     @ManyToOne(optional = false)
     private Vinculacion vinculacion;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "empleado")
     private List<Historialaboral> historialaboralList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "empleado")
-    private List<Huellas> huellasList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "empleado")
-    private List<Anomalia> anomaliaList;
 
     public Empleado() {
     }
@@ -116,9 +101,7 @@ public class Empleado implements Serializable {
     }
 
     public void setIdEmpleado(Integer idEmpleado) {
-        Integer oldIdEmpleado = this.idEmpleado;
         this.idEmpleado = idEmpleado;
-        changeSupport.firePropertyChange("idEmpleado", oldIdEmpleado, idEmpleado);
     }
 
     public String getNombres() {
@@ -126,9 +109,7 @@ public class Empleado implements Serializable {
     }
 
     public void setNombres(String nombres) {
-        String oldNombres = this.nombres;
         this.nombres = nombres;
-        changeSupport.firePropertyChange("nombres", oldNombres, nombres);
     }
 
     public String getApellidos() {
@@ -136,9 +117,7 @@ public class Empleado implements Serializable {
     }
 
     public void setApellidos(String apellidos) {
-        String oldApellidos = this.apellidos;
         this.apellidos = apellidos;
-        changeSupport.firePropertyChange("apellidos", oldApellidos, apellidos);
     }
 
     public Date getFechaNacimiento() {
@@ -146,9 +125,7 @@ public class Empleado implements Serializable {
     }
 
     public void setFechaNacimiento(Date fechaNacimiento) {
-        Date oldFechaNacimiento = this.fechaNacimiento;
         this.fechaNacimiento = fechaNacimiento;
-        changeSupport.firePropertyChange("fechaNacimiento", oldFechaNacimiento, fechaNacimiento);
     }
 
     public String getDireccion() {
@@ -156,9 +133,7 @@ public class Empleado implements Serializable {
     }
 
     public void setDireccion(String direccion) {
-        String oldDireccion = this.direccion;
         this.direccion = direccion;
-        changeSupport.firePropertyChange("direccion", oldDireccion, direccion);
     }
 
     public int getTelefono() {
@@ -166,9 +141,7 @@ public class Empleado implements Serializable {
     }
 
     public void setTelefono(int telefono) {
-        int oldTelefono = this.telefono;
         this.telefono = telefono;
-        changeSupport.firePropertyChange("telefono", oldTelefono, telefono);
     }
 
     public String getEmail() {
@@ -176,9 +149,7 @@ public class Empleado implements Serializable {
     }
 
     public void setEmail(String email) {
-        String oldEmail = this.email;
         this.email = email;
-        changeSupport.firePropertyChange("email", oldEmail, email);
     }
 
     public String getTipoSangre() {
@@ -186,9 +157,7 @@ public class Empleado implements Serializable {
     }
 
     public void setTipoSangre(String tipoSangre) {
-        String oldTipoSangre = this.tipoSangre;
         this.tipoSangre = tipoSangre;
-        changeSupport.firePropertyChange("tipoSangre", oldTipoSangre, tipoSangre);
     }
 
     public byte[] getFoto() {
@@ -196,33 +165,7 @@ public class Empleado implements Serializable {
     }
 
     public void setFoto(byte[] foto) {
-        byte[] oldFoto = this.foto;
         this.foto = foto;
-        changeSupport.firePropertyChange("foto", oldFoto, foto);
-    }
-
-    public List<Familiar> getFamiliarList() {
-        return familiarList;
-    }
-
-    public void setFamiliarList(List<Familiar> familiarList) {
-        this.familiarList = familiarList;
-    }
-
-    public List<Salario> getSalarioList() {
-        return salarioList;
-    }
-
-    public void setSalarioList(List<Salario> salarioList) {
-        this.salarioList = salarioList;
-    }
-
-    public List<Turnos> getTurnosList() {
-        return turnosList;
-    }
-
-    public void setTurnosList(List<Turnos> turnosList) {
-        this.turnosList = turnosList;
     }
 
     public Vinculacion getVinculacion() {
@@ -230,9 +173,7 @@ public class Empleado implements Serializable {
     }
 
     public void setVinculacion(Vinculacion vinculacion) {
-        Vinculacion oldVinculacion = this.vinculacion;
         this.vinculacion = vinculacion;
-        changeSupport.firePropertyChange("vinculacion", oldVinculacion, vinculacion);
     }
 
     public List<Historialaboral> getHistorialaboralList() {
@@ -241,22 +182,6 @@ public class Empleado implements Serializable {
 
     public void setHistorialaboralList(List<Historialaboral> historialaboralList) {
         this.historialaboralList = historialaboralList;
-    }
-
-    public List<Huellas> getHuellasList() {
-        return huellasList;
-    }
-
-    public void setHuellasList(List<Huellas> huellasList) {
-        this.huellasList = huellasList;
-    }
-
-    public List<Anomalia> getAnomaliaList() {
-        return anomaliaList;
-    }
-
-    public void setAnomaliaList(List<Anomalia> anomaliaList) {
-        this.anomaliaList = anomaliaList;
     }
 
     @Override
@@ -281,19 +206,7 @@ public class Empleado implements Serializable {
 
     @Override
     public String toString() {
-        return "registrocontrol.clases.Empleado[idEmpleado=" + idEmpleado + "]";
-    }
-
-    public void addPropertyChangeListener(PropertyChangeListener listener) {
-        changeSupport.addPropertyChangeListener(listener);
-    }
-
-    public void removePropertyChangeListener(PropertyChangeListener listener) {
-        changeSupport.removePropertyChangeListener(listener);
-    }
-
-    public void setDescripcion(String nombreEmpleado) {
-        throw new UnsupportedOperationException("Not yet implemented");
+        return "clases.Empleado[idEmpleado=" + idEmpleado + "]";
     }
 
 }
