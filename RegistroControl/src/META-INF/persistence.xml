@@ -23,6 +23,7 @@
   <persistence-unit name="EMPLEADITOSPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>clases.Vinculacion</class>
+    <class>clases.Empleado</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/EMPLEADITOS"/>
       <property name="javax.persistence.jdbc.password" value=""/>

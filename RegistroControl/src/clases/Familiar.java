@@ -5,8 +5,6 @@
 
 package clases;
 
-import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeSupport;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
@@ -20,11 +18,10 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.Transient;
 
 /**
  *
- * @author GeRmAn
+ * @author gurzaf
  */
 @Entity
 @Table(name = "familiar")
@@ -36,8 +33,6 @@ import javax.persistence.Transient;
     @NamedQuery(name = "Familiar.findByFechaNacimiento", query = "SELECT f FROM Familiar f WHERE f.fechaNacimiento = :fechaNacimiento"),
     @NamedQuery(name = "Familiar.findByParentesco", query = "SELECT f FROM Familiar f WHERE f.parentesco = :parentesco")})
 public class Familiar implements Serializable {
-    @Transient
-    private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -80,9 +75,7 @@ public class Familiar implements Serializable {
     }
 
     public void setIdFamiliar(Integer idFamiliar) {
-        Integer oldIdFamiliar = this.idFamiliar;
         this.idFamiliar = idFamiliar;
-        changeSupport.firePropertyChange("idFamiliar", oldIdFamiliar, idFamiliar);
     }
 
     public String getNombres() {
@@ -90,9 +83,7 @@ public class Familiar implements Serializable {
     }
 
     public void setNombres(String nombres) {
-        String oldNombres = this.nombres;
         this.nombres = nombres;
-        changeSupport.firePropertyChange("nombres", oldNombres, nombres);
     }
 
     public String getApellidos() {
@@ -100,9 +91,7 @@ public class Familiar implements Serializable {
     }
 
     public void setApellidos(String apellidos) {
-        String oldApellidos = this.apellidos;
         this.apellidos = apellidos;
-        changeSupport.firePropertyChange("apellidos", oldApellidos, apellidos);
     }
 
     public Date getFechaNacimiento() {
@@ -110,9 +99,7 @@ public class Familiar implements Serializable {
     }
 
     public void setFechaNacimiento(Date fechaNacimiento) {
-        Date oldFechaNacimiento = this.fechaNacimiento;
         this.fechaNacimiento = fechaNacimiento;
-        changeSupport.firePropertyChange("fechaNacimiento", oldFechaNacimiento, fechaNacimiento);
     }
 
     public String getParentesco() {
@@ -120,9 +107,7 @@ public class Familiar implements Serializable {
     }
 
     public void setParentesco(String parentesco) {
-        String oldParentesco = this.parentesco;
         this.parentesco = parentesco;
-        changeSupport.firePropertyChange("parentesco", oldParentesco, parentesco);
     }
 
     public Empleado getEmpleado() {
@@ -130,9 +115,7 @@ public class Familiar implements Serializable {
     }
 
     public void setEmpleado(Empleado empleado) {
-        Empleado oldEmpleado = this.empleado;
         this.empleado = empleado;
-        changeSupport.firePropertyChange("empleado", oldEmpleado, empleado);
     }
 
     @Override
@@ -157,15 +140,7 @@ public class Familiar implements Serializable {
 
     @Override
     public String toString() {
-        return "registrocontrol.clases.Familiar[idFamiliar=" + idFamiliar + "]";
-    }
-
-    public void addPropertyChangeListener(PropertyChangeListener listener) {
-        changeSupport.addPropertyChangeListener(listener);
-    }
-
-    public void removePropertyChangeListener(PropertyChangeListener listener) {
-        changeSupport.removePropertyChangeListener(listener);
+        return "clases.Familiar[idFamiliar=" + idFamiliar + "]";
     }
 
 }

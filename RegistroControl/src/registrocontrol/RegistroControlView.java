@@ -120,6 +120,9 @@ public class RegistroControlView extends FrameView {
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem7 = new javax.swing.JMenuItem();
         jMenuItem13 = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        jMenuItem9 = new javax.swing.JMenuItem();
+        jMenuItem14 = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem8 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
@@ -222,16 +225,36 @@ public class RegistroControlView extends FrameView {
 
         menuBar.add(jMenu3);
 
+        jMenu2.setText(resourceMap.getString("jMenu2.text")); // NOI18N
+        jMenu2.setName("jMenu2"); // NOI18N
+
+        jMenuItem9.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem9.setText(resourceMap.getString("jMenuItem9.text")); // NOI18N
+        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem9ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem9);
+
+        jMenuItem14.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem14.setText(resourceMap.getString("jMenuItem14.text")); // NOI18N
+        jMenuItem14.setName("jMenuItem14"); // NOI18N
+        jMenuItem14.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem14ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem14);
+
+        menuBar.add(jMenu2);
+
         jMenu1.setText(resourceMap.getString("jMenu1.text")); // NOI18N
         jMenu1.setName("jMenu1"); // NOI18N
 
+        jMenuItem8.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem8.setText(resourceMap.getString("jMenuItem8.text")); // NOI18N
         jMenuItem8.setName("jMenuItem8"); // NOI18N
-        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem8ActionPerformed(evt);
-            }
-        });
         jMenu1.add(jMenuItem8);
 
         jMenuItem3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_H, java.awt.event.InputEvent.CTRL_MASK));
@@ -347,12 +370,17 @@ public class RegistroControlView extends FrameView {
 
     }//GEN-LAST:event_jMenuItem12ActionPerformed
 
-    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
-        cambiarPanelPrincipal(new PanelAnomalias());
-    }//GEN-LAST:event_jMenuItem8ActionPerformed
+    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
+        cambiarPanelPrincipal(new PanelNuevoEmpleado());
+    }//GEN-LAST:event_jMenuItem9ActionPerformed
+
+    private void jMenuItem14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem14ActionPerformed
+        cambiarPanelPrincipal(new PanelListaEmpleados());
+    }//GEN-LAST:event_jMenuItem14ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuItem jMenuItem1;
@@ -360,6 +388,7 @@ public class RegistroControlView extends FrameView {
     private javax.swing.JMenuItem jMenuItem11;
     private javax.swing.JMenuItem jMenuItem12;
     private javax.swing.JMenuItem jMenuItem13;
+    private javax.swing.JMenuItem jMenuItem14;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
@@ -367,6 +396,7 @@ public class RegistroControlView extends FrameView {
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
+    private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JProgressBar progressBar;
