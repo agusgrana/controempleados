@@ -5,8 +5,6 @@
 
 package clases;
 
-import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeSupport;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
@@ -22,11 +20,10 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.Transient;
 
 /**
  *
- * @author GeRmAn
+ * @author gurzaf
  */
 @Entity
 @Table(name = "anomalia")
@@ -36,8 +33,6 @@ import javax.persistence.Transient;
     @NamedQuery(name = "Anomalia.findByFecha", query = "SELECT a FROM Anomalia a WHERE a.fecha = :fecha"),
     @NamedQuery(name = "Anomalia.findByDescripcion", query = "SELECT a FROM Anomalia a WHERE a.descripcion = :descripcion")})
 public class Anomalia implements Serializable {
-    @Transient
-    private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -71,9 +66,7 @@ public class Anomalia implements Serializable {
     }
 
     public void setIdAnomalia(Integer idAnomalia) {
-        Integer oldIdAnomalia = this.idAnomalia;
         this.idAnomalia = idAnomalia;
-        changeSupport.firePropertyChange("idAnomalia", oldIdAnomalia, idAnomalia);
     }
 
     public Date getFecha() {
@@ -81,9 +74,7 @@ public class Anomalia implements Serializable {
     }
 
     public void setFecha(Date fecha) {
-        Date oldFecha = this.fecha;
         this.fecha = fecha;
-        changeSupport.firePropertyChange("fecha", oldFecha, fecha);
     }
 
     public String getDescripcion() {
@@ -91,9 +82,7 @@ public class Anomalia implements Serializable {
     }
 
     public void setDescripcion(String descripcion) {
-        String oldDescripcion = this.descripcion;
         this.descripcion = descripcion;
-        changeSupport.firePropertyChange("descripcion", oldDescripcion, descripcion);
     }
 
     public Empleado getEmpleado() {
@@ -101,9 +90,7 @@ public class Anomalia implements Serializable {
     }
 
     public void setEmpleado(Empleado empleado) {
-        Empleado oldEmpleado = this.empleado;
         this.empleado = empleado;
-        changeSupport.firePropertyChange("empleado", oldEmpleado, empleado);
     }
 
     @Override
@@ -128,15 +115,7 @@ public class Anomalia implements Serializable {
 
     @Override
     public String toString() {
-        return "registrocontrol.clases.Anomalia[idAnomalia=" + idAnomalia + "]";
-    }
-
-    public void addPropertyChangeListener(PropertyChangeListener listener) {
-        changeSupport.addPropertyChangeListener(listener);
-    }
-
-    public void removePropertyChangeListener(PropertyChangeListener listener) {
-        changeSupport.removePropertyChangeListener(listener);
+        return "clases.Anomalia[idAnomalia=" + idAnomalia + "]";
     }
 
 }

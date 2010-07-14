@@ -24,7 +24,7 @@ import javax.persistence.TemporalType;
 
 /**
  *
- * @author GeRmAn
+ * @author gurzaf
  */
 @Entity
 @Table(name = "registro")
@@ -116,7 +116,7 @@ public class Registro implements Serializable {
 
     @Override
     public String toString() {
-        return "registrocontrol.clases.Registro[idRegistro=" + idRegistro + "]";
+        return "clases.Registro[idRegistro=" + idRegistro + "]";
     }
 
 }

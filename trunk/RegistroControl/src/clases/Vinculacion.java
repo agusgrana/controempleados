@@ -5,10 +5,10 @@
 
 package clases;
 
-import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeSupport;
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,8 +16,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 /**
  *
@@ -31,8 +31,6 @@ import javax.persistence.Transient;
     @NamedQuery(name = "Vinculacion.findByDescripcion", query = "SELECT v FROM Vinculacion v WHERE v.descripcion = :descripcion"),
     @NamedQuery(name = "Vinculacion.findByPrestaciones", query = "SELECT v FROM Vinculacion v WHERE v.prestaciones = :prestaciones")})
 public class Vinculacion implements Serializable {
-    @Transient
-    private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -45,6 +43,8 @@ public class Vinculacion implements Serializable {
     @Basic(optional = false)
     @Column(name = "prestaciones")
     private boolean prestaciones;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "vinculacion")
+    private List<Empleado> empleadoList;
 
     public Vinculacion() {
     }
@@ -64,9 +64,7 @@ public class Vinculacion implements Serializable {
     }
 
     public void setIdVinculacion(Integer idVinculacion) {
-        Integer oldIdVinculacion = this.idVinculacion;
         this.idVinculacion = idVinculacion;
-        changeSupport.firePropertyChange("idVinculacion", oldIdVinculacion, idVinculacion);
     }
 
     public String getDescripcion() {
@@ -74,9 +72,7 @@ public class Vinculacion implements Serializable {
     }
 
     public void setDescripcion(String descripcion) {
-        String oldDescripcion = this.descripcion;
         this.descripcion = descripcion;
-        changeSupport.firePropertyChange("descripcion", oldDescripcion, descripcion);
     }
 
     public boolean getPrestaciones() {
@@ -84,9 +80,15 @@ public class Vinculacion implements Serializable {
     }
 
     public void setPrestaciones(boolean prestaciones) {
-        boolean oldPrestaciones = this.prestaciones;
         this.prestaciones = prestaciones;
-        changeSupport.firePropertyChange("prestaciones", oldPrestaciones, prestaciones);
+    }
+
+    public List<Empleado> getEmpleadoList() {
+        return empleadoList;
+    }
+
+    public void setEmpleadoList(List<Empleado> empleadoList) {
+        this.empleadoList = empleadoList;
     }
 
     @Override
@@ -112,14 +114,6 @@ public class Vinculacion implements Serializable {
     @Override
     public String toString() {
         return "clases.Vinculacion[idVinculacion=" + idVinculacion + "]";
-    }
-
-    public void addPropertyChangeListener(PropertyChangeListener listener) {
-        changeSupport.addPropertyChangeListener(listener);
-    }
-
-    public void removePropertyChangeListener(PropertyChangeListener listener) {
-        changeSupport.removePropertyChangeListener(listener);
     }
 
 }

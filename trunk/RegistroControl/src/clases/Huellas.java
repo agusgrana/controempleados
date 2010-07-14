@@ -21,7 +21,7 @@ import javax.persistence.Table;
 
 /**
  *
- * @author GeRmAn
+ * @author gurzaf
  */
 @Entity
 @Table(name = "huellas")
@@ -101,7 +101,7 @@ public class Huellas implements Serializable {
 
     @Override
     public String toString() {
-        return "registrocontrol.clases.Huellas[idHuellas=" + idHuellas + "]";
+        return "clases.Huellas[idHuellas=" + idHuellas + "]";
     }
 
 }
