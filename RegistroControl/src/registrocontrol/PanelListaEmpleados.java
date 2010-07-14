@@ -11,6 +11,15 @@
 
 package registrocontrol;
 
+import clases.Historialaboral;
+import java.awt.Component;
+import java.util.List;
+import javax.persistence.Query;
+import javax.swing.JLabel;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.TableCellRenderer;
+
 /**
  *
  * @author gurzaf
@@ -33,8 +42,8 @@ public class PanelListaEmpleados extends javax.swing.JPanel {
         bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(registrocontrol.RegistroControlApp.class).getContext().getResourceMap(PanelListaEmpleados.class);
-        EMPLEADITOSPUEntityManager = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory(resourceMap.getString("EMPLEADITOSPUEntityManager.persistenceUnit")).createEntityManager(); // NOI18N
-        empleadoQuery = java.beans.Beans.isDesignTime() ? null : EMPLEADITOSPUEntityManager.createQuery("SELECT e FROM Empleado e");
+        entityManager = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory(resourceMap.getString("entityManager.persistenceUnit")).createEntityManager(); // NOI18N
+        empleadoQuery = java.beans.Beans.isDesignTime() ? null : entityManager.createQuery("SELECT e FROM Empleado e");
         empleadoList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : empleadoQuery.getResultList();
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
@@ -59,25 +68,32 @@ public class PanelListaEmpleados extends javax.swing.JPanel {
         org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${idEmpleado}"));
         columnBinding.setColumnName("Id Empleado");
         columnBinding.setColumnClass(Long.class);
+        columnBinding.setEditable(false);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${nombres} ${apellidos}"));
         columnBinding.setColumnName("Nombres} ${apellidos");
+        columnBinding.setEditable(false);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${email}"));
         columnBinding.setColumnName("Email");
         columnBinding.setColumnClass(String.class);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${foto}"));
-        columnBinding.setColumnName("Foto");
-        columnBinding.setColumnClass(byte[].class);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${vinculacion}"));
-        columnBinding.setColumnName("Vinculacion");
-        columnBinding.setColumnClass(clases.Vinculacion.class);
+        columnBinding.setEditable(false);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${idEmpleado}"));
+        columnBinding.setColumnName("Id Empleado");
+        columnBinding.setColumnClass(Long.class);
+        columnBinding.setEditable(false);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${vinculacion.descripcion}"));
+        columnBinding.setColumnName("Vinculacion.descripcion");
+        columnBinding.setColumnClass(String.class);
+        columnBinding.setEditable(false);
         bindingGroup.addBinding(jTableBinding);
         jTableBinding.bind();
         jScrollPane2.setViewportView(jTable1);
         jTable1.getColumnModel().getColumn(0).setHeaderValue(resourceMap.getString("jTable1.columnModel.title0")); // NOI18N
         jTable1.getColumnModel().getColumn(1).setHeaderValue(resourceMap.getString("jTable1.columnModel.title1")); // NOI18N
         jTable1.getColumnModel().getColumn(2).setHeaderValue(resourceMap.getString("jTable1.columnModel.title6")); // NOI18N
-        jTable1.getColumnModel().getColumn(3).setHeaderValue(resourceMap.getString("jTable1.columnModel.title8")); // NOI18N
+        jTable1.getColumnModel().getColumn(3).setHeaderValue(resourceMap.getString("jTable1.columnModel.title3")); // NOI18N
+        jTable1.getColumnModel().getColumn(3).setCellRenderer(new ConversorCargo());
         jTable1.getColumnModel().getColumn(4).setHeaderValue(resourceMap.getString("jTable1.columnModel.title10")); // NOI18N
+        jTable1.getColumnModel().getColumn(4).setCellRenderer(null);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -112,9 +128,9 @@ public class PanelListaEmpleados extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.persistence.EntityManager EMPLEADITOSPUEntityManager;
     private java.util.List<clases.Empleado> empleadoList;
     private javax.persistence.Query empleadoQuery;
+    private javax.persistence.EntityManager entityManager;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -122,5 +138,31 @@ public class PanelListaEmpleados extends javax.swing.JPanel {
     private javax.swing.JToolBar jToolBar1;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
+
+
+    class ConversorCargo implements TableCellRenderer{
+
+        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+            JLabel jlabel = (JLabel) new DefaultTableCellRenderer().getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+
+                Long v = (Long) value;
+                Query q = entityManager.createNamedQuery("Historialaboral.findByIdEmpleado");
+                q.setParameter("idEmpleado", v);
+                List<Historialaboral> listaCargos = q.getResultList();
+                for (Historialaboral historialaboral : listaCargos) {
+
+                    if(historialaboral.getFechaSalida()==null){
+                        jlabel.setText(historialaboral.getCargo());
+                        break;
+                    }
+
+            }
+                
+            
+            return jlabel;
+        }
+
+    }
+
 
 }

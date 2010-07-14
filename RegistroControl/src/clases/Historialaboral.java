@@ -33,6 +33,7 @@ import javax.persistence.TemporalType;
     @NamedQuery(name = "Historialaboral.findByCargo", query = "SELECT h FROM Historialaboral h WHERE h.cargo = :cargo"),
     @NamedQuery(name = "Historialaboral.findByFechaInicio", query = "SELECT h FROM Historialaboral h WHERE h.fechaInicio = :fechaInicio"),
     @NamedQuery(name = "Historialaboral.findByFechaSalida", query = "SELECT h FROM Historialaboral h WHERE h.fechaSalida = :fechaSalida"),
+    @NamedQuery(name = "Historialaboral.findByIdEmpleado", query = "SELECT h FROM Historialaboral h JOIN h.empleado e WHERE e.idEmpleado = :idEmpleado"),
     @NamedQuery(name = "Historialaboral.findBySalarioBase", query = "SELECT h FROM Historialaboral h WHERE h.salarioBase = :salarioBase")})
 public class Historialaboral implements Serializable {
     private static final long serialVersionUID = 1L;
