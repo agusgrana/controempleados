@@ -371,11 +371,11 @@ public class RegistroControlView extends FrameView {
     }//GEN-LAST:event_jMenuItem12ActionPerformed
 
     private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
-        cambiarPanelPrincipal(new PanelNuevoEmpleado());
+        cambiarPanelPrincipal(new PanelNuevoEmpleado(this));
     }//GEN-LAST:event_jMenuItem9ActionPerformed
 
     private void jMenuItem14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem14ActionPerformed
-        cambiarPanelPrincipal(new PanelListaEmpleados());
+        cambiarPanelPrincipal(new PanelListaEmpleados(this));
     }//GEN-LAST:event_jMenuItem14ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -1,20 +1,4 @@
 /*
- * To change th
-
-            @Override
-            public boolean accept(File f) {
-                throw new UnsupportedOperationException("Not supported yet.");
-            }
-
-            @Override
-            public String getDescription() {
-                throw new UnsupportedOperationException("Not supported yet.");
-            }
-        }s template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/*
  * PanelNuevoEmpleado.java
  *
  * Created on 13/07/2010, 02:16:26 PM
@@ -27,17 +11,17 @@ import clases.Historialaboral;
 import clases.Vinculacion;
 import java.awt.Component;
 import java.awt.Image;
-import java.awt.Toolkit;
-import java.awt.image.BufferedImage;
 import java.awt.image.RenderedImage;
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.Locale;
 import java.util.Enumeration;
+import java.util.List;
 import javax.imageio.ImageIO;
+import javax.persistence.Query;
 import javax.swing.AbstractButton;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.ImageIcon;
@@ -56,12 +40,72 @@ import registrocontrol.lib.Valida;
  */
 public class PanelNuevoEmpleado extends javax.swing.JPanel {
 
+    private RegistroControlView registroControlView;
+    private Empleado empleado;
+    private Historialaboral cargo;
+    private Image foto;
+    private boolean nuevo;
     
-
     /** Creates new form PanelNuevoEmpleado */
-    public PanelNuevoEmpleado() {
+    public PanelNuevoEmpleado(RegistroControlView registroControlView) {
+        nuevo=true;
+        this.registroControlView=registroControlView;
         initComponents();
+        entityManager.getTransaction().begin();
     }
+
+    public PanelNuevoEmpleado(RegistroControlView registroControlView,long idEmpleado) {
+        nuevo=false;
+        this.registroControlView=registroControlView;
+        initComponents();
+        entityManager.getTransaction().begin();
+        this.empleado=entityManager.find(Empleado.class, idEmpleado);
+        campoId.setText(empleado.getIdEmpleado()+"");
+        campoId.setEditable(false);
+        botonLimpiar.setEnabled(false);
+        campoNombres.setText(empleado.getNombres());
+        campoApellido.setText(empleado.getApellidos());
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(empleado.getFechaNacimiento());
+        dateChooserDialog1.setSelectedDate(cal);
+        campoFecha.setText(fechaSeleccionada());
+        campoDireccion.setText(empleado.getDireccion());
+        campoTelefono.setText(empleado.getTelefono()+"");
+        campoCorreo.setText(empleado.getEmail());
+        for(int i=0;i<campoSangre.getItemCount();i++){
+            if(campoSangre.getItemAt(i).toString().equals(empleado.getTipoSangre()))
+            {
+                campoSangre.setSelectedIndex(i);
+                break;
+            }
+        }
+        if(empleado.getRh()==jRadioButton1.getActionCommand().charAt(0))
+            jRadioButton1.setSelected(true);
+        else jRadioButton2.setSelected(true);
+        campoVinculacion.setSelectedItem(empleado.getVinculacion());
+        Query q = entityManager.createNamedQuery("Historialaboral.findByIdEmpleado");
+           q.setParameter("idEmpleado", empleado.getIdEmpleado());
+           List<Historialaboral> listaCargos = q.getResultList();
+           for (Historialaboral historialaboral : listaCargos) {
+
+                    if(historialaboral.getFechaSalida()==null){
+                        cargo=historialaboral;
+                        campoCargo.setText(cargo.getCargo());
+                        cal.setTime(cargo.getFechaInicio());
+                        campoFechaVincu.setSelectedDate(cal);
+                        campoSalario.setText(cargo.getSalarioBase()+"");
+                        break;
+                    }
+           }
+        try {
+            foto = ImageIO.read(new ByteArrayInputStream(empleado.getFoto()));
+        } catch (IOException ex) {
+            System.out.println(ex);
+        }
+        labelFoto.setIcon(new ImageIcon(foto));
+        
+    }
+
 
     private char rhSeleccionado(){
         Enumeration<AbstractButton> botones =  campoRH.getElements();
@@ -123,7 +167,7 @@ public class PanelNuevoEmpleado extends javax.swing.JPanel {
         jButton2 = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JSeparator();
         jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        botonLimpiar = new javax.swing.JButton();
         jLabel14 = new javax.swing.JLabel();
         campoFechaVincu = new datechooser.beans.DateChooserCombo();
         campoSangre = new javax.swing.JComboBox();
@@ -281,11 +325,11 @@ public class PanelNuevoEmpleado extends javax.swing.JPanel {
             }
         });
 
-        jButton4.setText(resourceMap.getString("jButton4.text")); // NOI18N
-        jButton4.setName("jButton4"); // NOI18N
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        botonLimpiar.setText(resourceMap.getString("botonLimpiar.text")); // NOI18N
+        botonLimpiar.setName("botonLimpiar"); // NOI18N
+        botonLimpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                botonLimpiarActionPerformed(evt);
             }
         });
 
@@ -387,7 +431,7 @@ public class PanelNuevoEmpleado extends javax.swing.JPanel {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jButton3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton4)))))
+                                .addComponent(botonLimpiar)))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -462,7 +506,7 @@ public class PanelNuevoEmpleado extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton3)
-                    .addComponent(jButton4))
+                    .addComponent(botonLimpiar))
                 .addGap(50, 50, 50))
         );
 
@@ -487,10 +531,7 @@ public class PanelNuevoEmpleado extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void dateChooserDialog1OnCommit(datechooser.events.CommitEvent evt) {//GEN-FIRST:event_dateChooserDialog1OnCommit
-        String fechita = dateChooserDialog1.getSelectedDate().get(Calendar.DATE)+" de ";
-        fechita+=dateChooserDialog1.getSelectedDate().getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault());
-        fechita+=" de "+dateChooserDialog1.getSelectedDate().get(Calendar.YEAR);
-        campoFecha.setText(fechita);
+        campoFecha.setText(fechaSeleccionada());
     }//GEN-LAST:event_dateChooserDialog1OnCommit
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -498,6 +539,7 @@ public class PanelNuevoEmpleado extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void escogeImagenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_escogeImagenActionPerformed
+        foto=null;
         campoFoto.setText(escogeImagen.getSelectedFile().getName());
         labelFoto.setIcon(new ImageIcon(selecFoto(true)));
     }//GEN-LAST:event_escogeImagenActionPerformed
@@ -525,56 +567,65 @@ public class PanelNuevoEmpleado extends javax.swing.JPanel {
              error("Indique un salario valido",campoSalario);
          else{
             try{
-                Empleado empleado = new Empleado(Long.parseLong(campoId.getText()));
+                if(empleado==null)
+                empleado = new Empleado(Long.parseLong(campoId.getText()));
                 empleado.setNombres(campoNombres.getText());
                 empleado.setApellidos(campoApellido.getText());
                 empleado.setFechaNacimiento(dateChooserDialog1.getSelectedDate().getTime());
                 empleado.setDireccion(campoDireccion.getText());
-                empleado.setTelefono(Integer.parseInt(campoTelefono.getText()));
+                empleado.setTelefono(Long.parseLong(campoTelefono.getText()));
                 empleado.setEmail(campoCorreo.getText());
                 empleado.setTipoSangre(campoSangre.getSelectedItem().toString());
                 empleado.setRh(rhSeleccionado());
                 empleado.setVinculacion((Vinculacion) campoVinculacion.getSelectedItem());
-                Image foto = null;
+                if(foto==null){
                 if(campoFoto.getText().isEmpty())
                 {
                         foto = selecFoto(false);
                 }else{
                         foto = selecFoto(true);
                 }
+                }
                 ByteArrayOutputStream bas = new ByteArrayOutputStream();
                 ImageIO.write((RenderedImage) foto,"png",bas);
                 byte[] fotoByte = bas.toByteArray();
                 empleado.setFoto(fotoByte);
-                Historialaboral cargo = new Historialaboral();
+                if(cargo==null)
+                    cargo = new Historialaboral();
                 cargo.setCargo(campoCargo.getText());
                 cargo.setFechaInicio(campoFechaVincu.getSelectedDate().getTime());
                 cargo.setSalarioBase(Integer.parseInt(campoSalario.getText()));
                 cargo.setEmpleado(empleado);
-                entityManager.getTransaction().begin();
-                entityManager.persist(empleado);
-                entityManager.persist(cargo);
+                if(nuevo)
+                {
+                    entityManager.persist(empleado);
+                    entityManager.persist(cargo);
+                }
                 entityManager.getTransaction().commit();
                 Mensajes.Ok(this, "El Empleado se ha guardado correctamente");
-                limpiarForma();
-                //entityManager.close();
+                registroControlView.cambiarPanelPrincipal(new PanelListaEmpleados(registroControlView));
             }catch(Exception w){
                 Mensajes.Error(this, "Error guardando el nuevo empleado!!");
                 System.out.println(w);
+                if(!nuevo)
+                    registroControlView.cambiarPanelPrincipal(new PanelNuevoEmpleado(registroControlView,empleado.getIdEmpleado()));
             }
+            entityManager.getTransaction().begin();
          }
     }//GEN-LAST:event_procesarFormulario
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
             campoFoto.setText("");
             labelFoto.setIcon(new ImageIcon(selecFoto(false)));
+            foto=null;
     }//GEN-LAST:event_jButton6ActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-            limpiarForma();
-    }//GEN-LAST:event_jButton4ActionPerformed
+    private void botonLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonLimpiarActionPerformed
+            registroControlView.cambiarPanelPrincipal(new PanelNuevoEmpleado(registroControlView));
+    }//GEN-LAST:event_botonLimpiarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton botonLimpiar;
     private javax.swing.JTextField campoApellido;
     private javax.swing.JTextField campoCargo;
     private javax.swing.JTextField campoCorreo;
@@ -595,7 +646,6 @@ public class PanelNuevoEmpleado extends javax.swing.JPanel {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -672,28 +722,20 @@ public class PanelNuevoEmpleado extends javax.swing.JPanel {
         try {
             if(b)
                 return Imagen.scale(escogeImagen.getSelectedFile(), 175, 175, true, false);
-            else
+            else{
                 return javax.imageio.ImageIO.read(getClass().getResource("/registrocontrol/resources/foto.png").openStream());
+            }
         } catch (IOException ex) {
            Mensajes.Error(this, "No se encontro la imágen");
         }
         return null;
     }
 
-    private void limpiarForma(){
-        campoId.setText("");
-        campoNombres.setText("");
-        campoApellido.setText("");
-        campoCargo.setText("");
-        campoCorreo.setText("");
-        campoDireccion.setText("");
-        campoFecha.setText("");
-        campoFechaVincu.setCurrent(Calendar.getInstance());
-        campoFoto.setText("");
-        campoSalario.setText("");
-        campoSangre.setSelectedIndex(0);
-        campoTelefono.setText("");
-        campoVinculacion.setSelectedIndex(0);
-        labelFoto.setIcon(new ImageIcon(selecFoto(false)));
+    private String fechaSeleccionada(){
+        String fechita = dateChooserDialog1.getSelectedDate().get(Calendar.DATE)+" de ";
+        fechita+=dateChooserDialog1.getSelectedDate().getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault());
+        fechita+=" de "+dateChooserDialog1.getSelectedDate().get(Calendar.YEAR);
+        return fechita;
     }
+
 }
