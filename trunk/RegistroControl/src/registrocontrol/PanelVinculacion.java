@@ -12,6 +12,7 @@
 package registrocontrol;
 
 import java.awt.Component;
+import javax.persistence.EntityManager;
 import registrocontrol.clases.Vinculacion;
 import javax.persistence.PersistenceException;
 import javax.swing.JLabel;
@@ -29,7 +30,9 @@ import registrocontrol.lib.Mensajes;
 public class PanelVinculacion extends javax.swing.JPanel {
 
     RegistroControlView registroControlView;
-
+    private boolean nuevo;
+    Vinculacion vinculacion;
+    
     /** Creates new form PanelVinculacion */
     public PanelVinculacion(RegistroControlView registroControlView) {
         initComponents();
@@ -48,7 +51,16 @@ public class PanelVinculacion extends javax.swing.JPanel {
 
         entityManager = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("RPU").createEntityManager();
         vinculacionQuery = java.beans.Beans.isDesignTime() ? null : entityManager.createQuery("SELECT v FROM Vinculacion v");
-        vinculacionList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : org.jdesktop.observablecollections.ObservableCollections.observableList(new java.util.LinkedList(vinculacionQuery.getResultList()));
+        vinculacionList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : org.jdesktop.observablecollections.ObservableCollections.observableList(vinculacionQuery.getResultList());
+        ventanaVinculacion = new javax.swing.JDialog();
+        jPanel2 = new javax.swing.JPanel();
+        jSeparator2 = new javax.swing.JSeparator();
+        jLabel2 = new javax.swing.JLabel();
+        botonAceptar = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
+        campoDesc = new javax.swing.JTextField();
+        campoPrest = new javax.swing.JCheckBox();
+        jLabel3 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -60,6 +72,108 @@ public class PanelVinculacion extends javax.swing.JPanel {
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
 
+        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(registrocontrol.RegistroControlApp.class).getContext().getResourceMap(PanelVinculacion.class);
+        ventanaVinculacion.setTitle(resourceMap.getString("ventanaVinculacion.title")); // NOI18N
+        ventanaVinculacion.setMinimumSize(new java.awt.Dimension(326, 140));
+        ventanaVinculacion.setModal(true);
+        ventanaVinculacion.setName("ventanaVinculacion"); // NOI18N
+        ventanaVinculacion.setResizable(false);
+        ventanaVinculacion.setLocationRelativeTo(null);
+
+        jPanel2.setMinimumSize(new java.awt.Dimension(326, 107));
+        jPanel2.setName("jPanel2"); // NOI18N
+
+        jSeparator2.setName("jSeparator2"); // NOI18N
+
+        jLabel2.setText(resourceMap.getString("jLabel2.text")); // NOI18N
+        jLabel2.setName("jLabel2"); // NOI18N
+
+        botonAceptar.setText(resourceMap.getString("botonAceptar.text")); // NOI18N
+        botonAceptar.setName("botonAceptar"); // NOI18N
+        botonAceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                campoDescbotonAceptarActionPerformed(evt);
+            }
+        });
+
+        jButton5.setText(resourceMap.getString("jButton5.text")); // NOI18N
+        jButton5.setName("jButton5"); // NOI18N
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
+        campoDesc.setName("campoDesc"); // NOI18N
+        campoDesc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                campoDescbotonAceptarActionPerformed(evt);
+            }
+        });
+
+        campoPrest.setText(resourceMap.getString("campoPrest.text")); // NOI18N
+        campoPrest.setName("campoPrest"); // NOI18N
+
+        jLabel3.setText(resourceMap.getString("jLabel3.text")); // NOI18N
+        jLabel3.setName("jLabel3"); // NOI18N
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 326, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(campoDesc, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(campoPrest))
+                            .addComponent(jSeparator2, javax.swing.GroupLayout.DEFAULT_SIZE, 306, Short.MAX_VALUE)
+                            .addComponent(jLabel3)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(71, 71, 71)
+                        .addComponent(botonAceptar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton5)))
+                .addContainerGap())
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 107, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(campoDesc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(campoPrest))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(botonAceptar)
+                    .addComponent(jButton5))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout ventanaVinculacionLayout = new javax.swing.GroupLayout(ventanaVinculacion.getContentPane());
+        ventanaVinculacion.getContentPane().setLayout(ventanaVinculacionLayout);
+        ventanaVinculacionLayout.setHorizontalGroup(
+            ventanaVinculacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        ventanaVinculacionLayout.setVerticalGroup(
+            ventanaVinculacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
         setName("Form"); // NOI18N
 
         jScrollPane2.setName("jScrollPane2"); // NOI18N
@@ -67,7 +181,6 @@ public class PanelVinculacion extends javax.swing.JPanel {
         jPanel1.setName("jPanel1"); // NOI18N
         jPanel1.setPreferredSize(new java.awt.Dimension(400, 359));
 
-        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(registrocontrol.RegistroControlApp.class).getContext().getResourceMap(PanelVinculacion.class);
         jLabel1.setText(resourceMap.getString("jLabel1.text")); // NOI18N
         jLabel1.setName("jLabel1"); // NOI18N
 
@@ -185,8 +298,9 @@ public class PanelVinculacion extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
-         new VentanaNuevaVinculacion(entityManager);
+
+        nuevo=true;
+        ventanaVinculacion.setVisible(true);
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -195,14 +309,11 @@ public class PanelVinculacion extends javax.swing.JPanel {
         if(Mensajes.Confirm(this, "¿Esta seguro que desea eliminar esta Vinculación?"))
         {
             try{
-                Vinculacion vinculacion = vinculacionList.get(tablaVincu.getSelectedRow());
+                vinculacion = vinculacionList.get(tablaVincu.getSelectedRow());
                 vinculacionList.remove(tablaVincu.getSelectedRow());
                 entityManager.getTransaction().begin();
                 entityManager.remove(vinculacion);
                 entityManager.getTransaction().commit();
-
-                
-                
             }catch(IndexOutOfBoundsException ie){
                 Mensajes.Error(this, "No ha seleccionado ninguna vinculación");
             }catch(PersistenceException pe){
@@ -214,10 +325,13 @@ public class PanelVinculacion extends javax.swing.JPanel {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 
         try{
-            Vinculacion vinculacion = vinculacionList.get(tablaVincu.getSelectedRow());
-            new VentanaNuevaVinculacion(vinculacion,entityManager);
-        }catch(IndexOutOfBoundsException ae){
-            Mensajes.Error(this, "No ha seleccionado ninguna vinculación");
+        vinculacion = vinculacionList.get(tablaVincu.getSelectedRow());
+        nuevo=false;
+        campoDesc.setText(vinculacion.getDescripcion());
+        campoPrest.setSelected(vinculacion.getPrestaciones());
+        ventanaVinculacion.setVisible(true);
+        }catch(IndexOutOfBoundsException ie){
+            Mensajes.Error(this, "Seleccione la vinculación a modificar");
         }
 
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -226,20 +340,40 @@ public class PanelVinculacion extends javax.swing.JPanel {
             registroControlView.cambiarPanelPrincipal(new PanelVinculacion(registroControlView));
     }//GEN-LAST:event_jButton4ActionPerformed
 
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        ventanaVinculacion.setVisible(false);
+}//GEN-LAST:event_jButton5ActionPerformed
+
+    private void campoDescbotonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoDescbotonAceptarActionPerformed
+        guardarVinculacion();
+}//GEN-LAST:event_campoDescbotonAceptarActionPerformed
+
+    public EntityManager getEntityManager(){
+        return entityManager;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton botonAceptar;
+    private javax.swing.JTextField campoDesc;
+    private javax.swing.JCheckBox campoPrest;
     private javax.persistence.EntityManager entityManager;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTable tablaVincu;
-    private java.util.List<registrocontrol.clases.Vinculacion> vinculacionList;
+    private javax.swing.JDialog ventanaVinculacion;
+    public java.util.List<registrocontrol.clases.Vinculacion> vinculacionList;
     private javax.persistence.Query vinculacionQuery;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
@@ -258,4 +392,32 @@ public class PanelVinculacion extends javax.swing.JPanel {
 
     }
 
+    private void guardarVinculacion(){
+        
+        if(campoDesc.getText().length()<3){
+            Mensajes.Error(this, "Ingrese una descripción adecuada");
+            campoDesc.requestFocus();
+            campoDesc.selectAll();
+        }else{
+            if(nuevo)
+                vinculacion = new Vinculacion();
+            vinculacion.setDescripcion(campoDesc.getText());
+            vinculacion.setPrestaciones(campoPrest.isSelected());
+            try{
+                entityManager.getTransaction().begin();
+                if(nuevo){
+                    entityManager.persist(vinculacion);
+                    vinculacionList.add(vinculacion);
+                }
+                entityManager.getTransaction().commit();
+                Mensajes.Ok(this, "Vinculación guardada exitosamente");
+            }catch(PersistenceException pe){
+                Mensajes.Error(this, "Error guardando la vinculación en la base de datos");
+                entityManager.getTransaction().commit();
+                System.out.println("Error: "+pe);
+            }
+            ventanaVinculacion.setVisible(false);
+            registroControlView.cambiarPanelPrincipal(new PanelVinculacion(registroControlView));
+        }
+    }
 }

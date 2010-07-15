@@ -133,7 +133,6 @@ public class Finger implements IStatusEventListener, IImageEventListener, IFinge
             if(repeticiones>0){
             
             huellasVerificar.add(new Template(template.getData()));
-            System.out.println(huellasVerificar.size());
             panelHuellas.labelMensaje.setText("Pase su dedo por el lector "+repeticiones+" vez mas ...");
             repeticiones--;
             }else{
