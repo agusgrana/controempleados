@@ -123,6 +123,11 @@ public class PanelListaEmpleados extends javax.swing.JPanel {
         jButton4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton4.setName("jButton4"); // NOI18N
         jButton4.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
         jToolBar1.add(jButton4);
 
         jSeparator1.setName("jSeparator1"); // NOI18N
@@ -237,6 +242,15 @@ public class PanelListaEmpleados extends javax.swing.JPanel {
                 Mensajes.Error(this, "Seleccione el empleado a modificar");
             }
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+            try{
+                Empleado empleado = empleadoList.get(jTable1.getSelectedRow());
+                registroControlView.cambiarPanelPrincipal(new PanelFamiliar(registroControlView,empleado));
+            }catch(IndexOutOfBoundsException ie){
+                Mensajes.Error(this, "Seleccione el empleado a modificar");
+            }
+    }//GEN-LAST:event_jButton4ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

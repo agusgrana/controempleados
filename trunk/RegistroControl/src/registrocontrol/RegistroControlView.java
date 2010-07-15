@@ -108,18 +108,11 @@ public class RegistroControlView extends FrameView {
 
         mainPanel = new javax.swing.JPanel();
         menuBar = new javax.swing.JMenuBar();
-        javax.swing.JMenu fileMenu = new javax.swing.JMenu();
-        jMenuItem11 = new javax.swing.JMenuItem();
-        jMenu5 = new javax.swing.JMenu();
-        jMenuItem5 = new javax.swing.JMenuItem();
-        jMenuItem10 = new javax.swing.JMenuItem();
-        jMenuItem6 = new javax.swing.JMenuItem();
-        jMenuItem12 = new javax.swing.JMenuItem();
-        javax.swing.JMenuItem exitMenuItem = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem7 = new javax.swing.JMenuItem();
         jMenuItem13 = new javax.swing.JMenuItem();
+        javax.swing.JMenuItem exitMenuItem = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem9 = new javax.swing.JMenuItem();
         jMenuItem14 = new javax.swing.JMenuItem();
@@ -151,63 +144,7 @@ public class RegistroControlView extends FrameView {
 
         menuBar.setName("menuBar"); // NOI18N
 
-        fileMenu.setName("fileMenu"); // NOI18N
-
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(registrocontrol.RegistroControlApp.class).getContext().getResourceMap(RegistroControlView.class);
-        jMenuItem11.setText(resourceMap.getString("jMenuItem11.text")); // NOI18N
-        jMenuItem11.setName("jMenuItem11"); // NOI18N
-        jMenuItem11.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem11ActionPerformed(evt);
-            }
-        });
-        fileMenu.add(jMenuItem11);
-
-        jMenu5.setText(resourceMap.getString("jMenu5.text")); // NOI18N
-        jMenu5.setName("jMenu5"); // NOI18N
-
-        jMenuItem5.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItem5.setText(resourceMap.getString("jMenuItem5.text")); // NOI18N
-        jMenuItem5.setName("jMenuItem5"); // NOI18N
-        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem5ActionPerformed(evt);
-            }
-        });
-        jMenu5.add(jMenuItem5);
-
-        jMenuItem10.setText(resourceMap.getString("jMenuItem10.text")); // NOI18N
-        jMenuItem10.setName("jMenuItem10"); // NOI18N
-        jMenu5.add(jMenuItem10);
-
-        jMenuItem6.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F, java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItem6.setText(resourceMap.getString("jMenuItem6.text")); // NOI18N
-        jMenuItem6.setName("jMenuItem6"); // NOI18N
-        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem6ActionPerformed(evt);
-            }
-        });
-        jMenu5.add(jMenuItem6);
-
-        fileMenu.add(jMenu5);
-
-        jMenuItem12.setText(resourceMap.getString("jMenuItem12.text")); // NOI18N
-        jMenuItem12.setName("jMenuItem12"); // NOI18N
-        jMenuItem12.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem12ActionPerformed(evt);
-            }
-        });
-        fileMenu.add(jMenuItem12);
-
-        javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(registrocontrol.RegistroControlApp.class).getContext().getActionMap(RegistroControlView.class, this);
-        exitMenuItem.setAction(actionMap.get("quit")); // NOI18N
-        exitMenuItem.setName("exitMenuItem"); // NOI18N
-        fileMenu.add(exitMenuItem);
-
-        menuBar.add(fileMenu);
-
         jMenu3.setText(resourceMap.getString("jMenu3.text")); // NOI18N
         jMenu3.setName("jMenu3"); // NOI18N
 
@@ -222,6 +159,11 @@ public class RegistroControlView extends FrameView {
         jMenuItem13.setText(resourceMap.getString("jMenuItem13.text")); // NOI18N
         jMenuItem13.setName("jMenuItem13"); // NOI18N
         jMenu3.add(jMenuItem13);
+
+        javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(registrocontrol.RegistroControlApp.class).getContext().getActionMap(RegistroControlView.class, this);
+        exitMenuItem.setAction(actionMap.get("quit")); // NOI18N
+        exitMenuItem.setName("exitMenuItem"); // NOI18N
+        jMenu3.add(exitMenuItem);
 
         menuBar.add(jMenu3);
 
@@ -284,7 +226,6 @@ public class RegistroControlView extends FrameView {
         menuBar.add(jMenu1);
 
         helpMenu.setText(resourceMap.getString("helpMenu.text")); // NOI18N
-        helpMenu.setName("helpMenu"); // NOI18N
 
         aboutMenuItem.setAction(actionMap.get("showAboutBox")); // NOI18N
         aboutMenuItem.setName("aboutMenuItem"); // NOI18N
@@ -346,30 +287,6 @@ public class RegistroControlView extends FrameView {
 
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
-    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-
-//        cambiarPanelPrincipal(new PanelEmpleados());
-
-    }//GEN-LAST:event_jMenuItem5ActionPerformed
-
-    private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
-
-        cambiarPanelPrincipal(new PanelHistoLaboral());
-
-    }//GEN-LAST:event_jMenuItem11ActionPerformed
-
-    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
-
-        cambiarPanelPrincipal(new PanelFamiliar());
-
-    }//GEN-LAST:event_jMenuItem6ActionPerformed
-
-    private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
-
-        cambiarPanelPrincipal(new PanelSalario());
-
-    }//GEN-LAST:event_jMenuItem12ActionPerformed
-
     private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
         cambiarPanelPrincipal(new PanelNuevoEmpleado(this));
     }//GEN-LAST:event_jMenuItem9ActionPerformed
@@ -382,18 +299,12 @@ public class RegistroControlView extends FrameView {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem10;
-    private javax.swing.JMenuItem jMenuItem11;
-    private javax.swing.JMenuItem jMenuItem12;
     private javax.swing.JMenuItem jMenuItem13;
     private javax.swing.JMenuItem jMenuItem14;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
-    private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;

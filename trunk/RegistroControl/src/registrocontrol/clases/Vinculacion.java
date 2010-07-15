@@ -113,7 +113,7 @@ public class Vinculacion implements Serializable {
 
     @Override
     public String toString() {
-        return "clases.Vinculacion[idVinculacion=" + idVinculacion + "]";
+        return "registrocontrol.clases.Vinculacion[idVinculacion=" + idVinculacion + "]";
     }
 
 }

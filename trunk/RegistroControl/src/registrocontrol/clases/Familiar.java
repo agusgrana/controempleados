@@ -10,6 +10,8 @@ import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -27,6 +29,7 @@ import javax.persistence.TemporalType;
 @Table(name = "familiar")
 @NamedQueries({
     @NamedQuery(name = "Familiar.findAll", query = "SELECT f FROM Familiar f"),
+    @NamedQuery(name = "Familiar.findByEmpleado", query = "SELECT f FROM Familiar f JOIN f.empleado e WHERE e.idEmpleado = :idEmpleado"),
     @NamedQuery(name = "Familiar.findByIdFamiliar", query = "SELECT f FROM Familiar f WHERE f.idFamiliar = :idFamiliar"),
     @NamedQuery(name = "Familiar.findByNombres", query = "SELECT f FROM Familiar f WHERE f.nombres = :nombres"),
     @NamedQuery(name = "Familiar.findByApellidos", query = "SELECT f FROM Familiar f WHERE f.apellidos = :apellidos"),
@@ -35,6 +38,7 @@ import javax.persistence.TemporalType;
 public class Familiar implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "idFamiliar")
     private Integer idFamiliar;
@@ -140,7 +144,7 @@ public class Familiar implements Serializable {
 
     @Override
     public String toString() {
-        return "clases.Familiar[idFamiliar=" + idFamiliar + "]";
+        return "registrocontrol.clases.Familiar[idFamiliar=" + idFamiliar + "]";
     }
 
 }
