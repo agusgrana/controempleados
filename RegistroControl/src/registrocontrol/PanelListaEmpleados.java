@@ -71,6 +71,7 @@ public class PanelListaEmpleados extends javax.swing.JPanel {
         jScrollPane1.setName("jScrollPane1"); // NOI18N
 
         jPanel1.setName("jPanel1"); // NOI18N
+        jPanel1.setPreferredSize(new java.awt.Dimension(800, 346));
 
         jToolBar1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jToolBar1.setFloatable(false);
@@ -188,8 +189,8 @@ public class PanelListaEmpleados extends javax.swing.JPanel {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 535, Short.MAX_VALUE)
-            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 535, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE)
+            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -289,7 +290,7 @@ public class PanelListaEmpleados extends javax.swing.JPanel {
            Query q = entityManager.createNamedQuery("Huellas.findByEmpleado");
            q.setParameter("idEmpleado", v);
            List<Huellas> listaHuellas = q.getResultList();
-           jlabel.setText(listaHuellas.size()+" huellas registradas");
+           jlabel.setText(listaHuellas.size()+"");
            return jlabel;
         }
 

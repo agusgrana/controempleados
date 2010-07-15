@@ -4,8 +4,10 @@
 
 package registrocontrol;
 
+import java.io.File;
 import org.jdesktop.application.Application;
 import org.jdesktop.application.SingleFrameApplication;
+import registrocontrol.lib.Finger;
 
 /**
  * The main class of the application.
@@ -40,5 +42,7 @@ public class RegistroControlApp extends SingleFrameApplication {
      */
     public static void main(String[] args) {
         launch(RegistroControlApp.class, args);
+        String grFingerNativeDirectory = new File(".").getAbsolutePath();
+        Finger.setFingerprintSDKNativeDirectory(grFingerNativeDirectory);
     }
 }

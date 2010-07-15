@@ -11,13 +11,36 @@
 
 package registrocontrol;
 
+
+import java.awt.Graphics;
+
 import registrocontrol.clases.Empleado;
 import java.awt.Image;
+import java.awt.Insets;
+
+import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+
 import javax.imageio.ImageIO;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceException;
 import javax.swing.ImageIcon;
 
+import javax.swing.JComponent;
+import javax.swing.JPanel;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.EmptyBorder;
+import registrocontrol.clases.Huellas;
+
+import registrocontrol.lib.Finger;
+import registrocontrol.lib.Mensajes;
+
+/**
+ *
+ * @author GeRmAn
+ */
 /**
  *
  * @author GeRmAn
@@ -27,8 +50,18 @@ public class PanelHuellas extends javax.swing.JPanel {
     RegistroControlView registroControlView;
     Empleado empleado;
 
+    //objeto usado para realizar todas las operaciones relacionadas al Fingerprint-SDK
+    private Finger finger;
+
+    //Panel para mostrar la huella digital
+    private JPanel fingerprintViewPanel = null;
+
+    //Imagen de la huella actual
+    private BufferedImage fingerprintImage = null;
+
     /** Creates new form PanelHuellas */
     PanelHuellas(RegistroControlView registroControlView, Empleado empleado) {
+        inicializar();
         this.registroControlView=registroControlView;
         this.empleado=empleado;
         initComponents();
@@ -41,6 +74,8 @@ public class PanelHuellas extends javax.swing.JPanel {
             System.out.println(ex);
         }
         labelFoto.setIcon(new ImageIcon(foto));
+        finger.inicializarCaptura();
+        this.panelContenedorHuella.add(crearPanelHuella());
     }
 
     /** This method is called from within the constructor to
@@ -55,8 +90,9 @@ public class PanelHuellas extends javax.swing.JPanel {
 
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(registrocontrol.RegistroControlApp.class).getContext().getResourceMap(PanelHuellas.class);
         entityManager = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory(resourceMap.getString("entityManager.persistenceUnit")).createEntityManager(); // NOI18N
-        huellasQuery = java.beans.Beans.isDesignTime() ? null : entityManager.createQuery("SELECT h FROM Huellas h");
-        huellasList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : huellasQuery.getResultList();
+        huellasQuery = entityManager.createNamedQuery("Huellas.findByEmpleado");
+        huellasQuery.setParameter("idEmpleado", empleado.getIdEmpleado());
+        huellasList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : org.jdesktop.observablecollections.ObservableCollections.observableList(huellasQuery.getResultList());
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
@@ -65,9 +101,13 @@ public class PanelHuellas extends javax.swing.JPanel {
         labelNombre = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         labelApellido = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
+        panelContenedorHuella = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        botonGuardar = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        labelMensaje = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setName("Form"); // NOI18N
 
@@ -121,41 +161,67 @@ public class PanelHuellas extends javax.swing.JPanel {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(20, 20, 20)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(labelFoto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(47, 47, 47)
-                                .addComponent(jLabel4))
-                            .addComponent(labelFoto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jLabel3)
+                                .addGap(53, 53, 53)
+                                .addComponent(jLabel4))))
                     .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
                         .addComponent(labelNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(labelApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap.getString("jPanel3.border.title"))); // NOI18N
-        jPanel3.setName("jPanel3"); // NOI18N
-        jPanel3.setLayout(new java.awt.BorderLayout());
+        panelContenedorHuella.setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap.getString("panelContenedorHuella.border.title"))); // NOI18N
+        panelContenedorHuella.setName("panelContenedorHuella"); // NOI18N
+        panelContenedorHuella.setLayout(new java.awt.BorderLayout());
 
         jScrollPane2.setName("jScrollPane2"); // NOI18N
 
+        jTable1.setAutoCreateRowSorter(true);
         jTable1.setName("jTable1"); // NOI18N
+        jTable1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
         org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, huellasList, jTable1);
         org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${descripcion}"));
         columnBinding.setColumnName("Descripcion");
         columnBinding.setColumnClass(String.class);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${idHuellas}"));
-        columnBinding.setColumnName("Id Huellas");
-        columnBinding.setColumnClass(Integer.class);
         bindingGroup.addBinding(jTableBinding);
         jTableBinding.bind();
         jScrollPane2.setViewportView(jTable1);
         jTable1.getColumnModel().getColumn(0).setHeaderValue(resourceMap.getString("jTable1.columnModel.title2")); // NOI18N
-        jTable1.getColumnModel().getColumn(1).setPreferredWidth(10);
-        jTable1.getColumnModel().getColumn(1).setHeaderValue(resourceMap.getString("jTable1.columnModel.title1")); // NOI18N
+
+        botonGuardar.setText(resourceMap.getString("botonGuardar.text")); // NOI18N
+        botonGuardar.setEnabled(false);
+        botonGuardar.setName("botonGuardar"); // NOI18N
+        botonGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonGuardarActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText(resourceMap.getString("jButton2.text")); // NOI18N
+        jButton2.setName("jButton2"); // NOI18N
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        labelMensaje.setText(resourceMap.getString("labelMensaje.text")); // NOI18N
+        labelMensaje.setName("labelMensaje"); // NOI18N
+
+        jButton1.setText(resourceMap.getString("jButton1.text")); // NOI18N
+        jButton1.setName("jButton1"); // NOI18N
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -163,12 +229,21 @@ public class PanelHuellas extends javax.swing.JPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                        .addComponent(botonGuardar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(labelMensaje, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane2, 0, 0, Short.MAX_VALUE))
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton2))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(panelContenedorHuella, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -179,8 +254,14 @@ public class PanelHuellas extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane2, 0, 0, Short.MAX_VALUE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE))
-                .addContainerGap(45, Short.MAX_VALUE))
+                    .addComponent(panelContenedorHuella, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(botonGuardar)
+                    .addComponent(labelMensaje, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2)
+                    .addComponent(jButton1))
+                .addContainerGap(11, Short.MAX_VALUE))
         );
 
         jScrollPane1.setViewportView(jPanel1);
@@ -199,23 +280,116 @@ public class PanelHuellas extends javax.swing.JPanel {
         bindingGroup.bind();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+
+        registroControlView.cambiarPanelPrincipal(new PanelListaEmpleados(registroControlView));
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void botonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGuardarActionPerformed
+        finger.procesoGuardar(empleado);
+    }//GEN-LAST:event_botonGuardarActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+        try{
+            Huellas huella = huellasList.get(jTable1.getSelectedRow());
+            if(Mensajes.Confirm(this, "¿Esta seguro que desea borrar esta huella?")){
+            entityManager.getTransaction().begin();
+            entityManager.remove(huella);
+            entityManager.getTransaction().commit();
+            huellasList.remove(jTable1.getSelectedRow());
+            }
+        }catch(IndexOutOfBoundsException ie){
+            Mensajes.Error(this, "Seleccione la huella a borrar");
+        }catch(PersistenceException pe){
+            Mensajes.Error(this, "Error al borrar la huella de la base de datos");
+            System.out.println("Error: \n"+pe);
+        }
+
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    public EntityManager getEntityManager(){
+        return entityManager;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JButton botonGuardar;
     private javax.persistence.EntityManager entityManager;
-    private java.util.List<registrocontrol.clases.Huellas> huellasList;
+    public java.util.List<registrocontrol.clases.Huellas> huellasList;
     private javax.persistence.Query huellasQuery;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
     private javax.swing.JLabel labelApellido;
     private javax.swing.JLabel labelFoto;
+    public javax.swing.JLabel labelMensaje;
     private javax.swing.JLabel labelNombre;
+    private javax.swing.JPanel panelContenedorHuella;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 
+    public void mostrarHuellas(BufferedImage huellaDigital) {
+        //Utiliza el imageProducer para crear una imagen de la huella digital
+        fingerprintImage = huellaDigital;
+        //Se dibuja la nueva imagen
+        repaint();
+    }
+
+    private void inicializar(){
+
+     //Crea una instancia de Finger
+        this.finger = new Finger(this);
+
+    }
+
+    // Crea el panel que contendrá la imagen de la huella digital
+      private JComponent crearPanelHuella() {
+      //Crea un panel nuevo para mostrar la huella
+      fingerprintViewPanel = new JPanel(){
+
+       //Se sobreescribe el método paintComponent
+       //para habilitar la muestra de la imagen de la huella
+            @Override
+       public void paintComponent(Graphics g) {
+           super.paintComponent(g);
+
+           //Si hay una imagen para ser mostrada
+           if (fingerprintImage!=null) {
+               //Calcula el tamaño y posición de la imagen para ser pintada
+               //el tamaño es ajustado para que ocupe todo el tamaño del panel
+               Insets insets = getInsets();
+               int transX = insets.left;
+               int transY = insets.top;
+               int width  = getWidth()  - getInsets().right  - getInsets().left;
+               int height = getHeight() - getInsets().bottom - getInsets().top;
+
+               //Se dibuja la imagen
+               g.drawImage(fingerprintImage, transX, transY, width, height, null);
+           }
+
+       }
+
+       };
+
+       //Se agrega un borde alrededor del panel
+       fingerprintViewPanel.setBorder(new CompoundBorder (
+           new EmptyBorder (2,2,2,2),
+           new BevelBorder(BevelBorder.LOWERED)));
+
+      //si no hay existe el panel de la huella no devuelve nada...
+      if(fingerprintViewPanel==null)
+      {
+        return null;
+      }else{ // de lo contrario devuelve el panel mismo
+
+        return fingerprintViewPanel;
+     }
+
+     }
 }
