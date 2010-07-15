@@ -75,11 +75,11 @@ public class Empleado implements Serializable {
     @Basic(optional = false)
     @Column(name = "rh")
     private char rh;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "empleado")
+    private List<Familiar> familiarList;
     @JoinColumn(name = "vinculacion", referencedColumnName = "idVinculacion")
     @ManyToOne(optional = false)
     private Vinculacion vinculacion;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "empleado")
-    private List<Huellas> huellasList;
 
     public Empleado() {
     }
@@ -181,20 +181,20 @@ public class Empleado implements Serializable {
         this.rh = rh;
     }
 
+    public List<Familiar> getFamiliarList() {
+        return familiarList;
+    }
+
+    public void setFamiliarList(List<Familiar> familiarList) {
+        this.familiarList = familiarList;
+    }
+
     public Vinculacion getVinculacion() {
         return vinculacion;
     }
 
     public void setVinculacion(Vinculacion vinculacion) {
         this.vinculacion = vinculacion;
-    }
-
-    public List<Huellas> getHuellasList() {
-        return huellasList;
-    }
-
-    public void setHuellasList(List<Huellas> huellasList) {
-        this.huellasList = huellasList;
     }
 
     @Override
@@ -219,7 +219,7 @@ public class Empleado implements Serializable {
 
     @Override
     public String toString() {
-        return "clases.Empleado[idEmpleado=" + idEmpleado + "]";
+        return "registrocontrol.clases.Empleado[idEmpleado=" + idEmpleado + "]";
     }
 
 }
