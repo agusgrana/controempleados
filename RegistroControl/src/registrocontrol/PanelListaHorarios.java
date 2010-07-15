@@ -12,7 +12,7 @@
 package registrocontrol;
 
 import registrocontrol.lib.Mensajes;
-import clases.Horario;
+import registrocontrol.clases.Horario;
 import java.awt.Component;
 import java.util.Date;
 import javax.persistence.PersistenceException;
@@ -229,7 +229,7 @@ public class PanelListaHorarios extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.persistence.EntityManager entityManager;
-    private java.util.List<clases.Horario> horarioList;
+    private java.util.List<registrocontrol.clases.Horario> horarioList;
     private javax.persistence.Query horarioQuery;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;

@@ -22,7 +22,7 @@
         </Property>
       </Properties>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;clases.Historialaboral&gt;"/>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;registrocontrol.clases.Historialaboral&gt;"/>
       </AuxValues>
     </Component>
   </NonVisualComponents>
@@ -158,7 +158,7 @@
                 <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="Integer.class"/>
               </Subbinding>
               <Subbinding sourcePath="${empleado}">
-                <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="clases.Empleado.class"/>
+                <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="registrocontrol.clases.Empleado.class"/>
               </Subbinding>
             </BindingProperty>
           </BindingProperties>

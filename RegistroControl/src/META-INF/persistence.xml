@@ -2,16 +2,16 @@
 <persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
   <persistence-unit name="RPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-    <class>clases.Salario</class>
-    <class>clases.Horario</class>
-    <class>clases.Familiar</class>
-    <class>clases.Historialaboral</class>
-    <class>clases.Turnos</class>
-    <class>clases.Anomalia</class>
-    <class>clases.Registro</class>
-    <class>clases.Huellas</class>
-    <class>clases.Empleado</class>
-    <class>clases.Vinculacion</class>
+    <class>registrocontrol.clases.Huellas</class>
+    <class>registrocontrol.clases.Familiar</class>
+    <class>registrocontrol.clases.Turnos</class>
+    <class>registrocontrol.clases.Horario</class>
+    <class>registrocontrol.clases.Anomalia</class>
+    <class>registrocontrol.clases.Salario</class>
+    <class>registrocontrol.clases.Registro</class>
+    <class>registrocontrol.clases.Historialaboral</class>
+    <class>registrocontrol.clases.Empleado</class>
+    <class>registrocontrol.clases.Vinculacion</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/empleaditos"/>
       <property name="javax.persistence.jdbc.password" value=""/>

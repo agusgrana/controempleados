@@ -99,7 +99,7 @@ public class PanelSalario extends javax.swing.JPanel {
         columnBinding.setColumnClass(Integer.class);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${empleado}"));
         columnBinding.setColumnName("Empleado");
-        columnBinding.setColumnClass(clases.Empleado.class);
+        columnBinding.setColumnClass(registrocontrol.clases.Empleado.class);
         bindingGroup.addBinding(jTableBinding);
         jTableBinding.bind();
         jScrollPane1.setViewportView(jTable1);
@@ -158,7 +158,7 @@ public class PanelSalario extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private java.util.List<clases.Salario> salarioList;
+    private java.util.List<registrocontrol.clases.Salario> salarioList;
     private javax.persistence.Query salarioQuery;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables

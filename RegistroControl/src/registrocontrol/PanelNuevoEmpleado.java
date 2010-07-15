@@ -6,9 +6,9 @@
 
 package registrocontrol;
 
-import clases.Empleado;
-import clases.Historialaboral;
-import clases.Vinculacion;
+import registrocontrol.clases.Empleado;
+import registrocontrol.clases.Historialaboral;
+import registrocontrol.clases.Vinculacion;
 import java.awt.Component;
 import java.awt.Image;
 import java.awt.image.RenderedImage;

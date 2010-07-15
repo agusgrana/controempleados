@@ -12,7 +12,7 @@
 package registrocontrol;
 
 import registrocontrol.lib.Mensajes;
-import clases.Horario;
+import registrocontrol.clases.Horario;
 import java.util.Date;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceException;

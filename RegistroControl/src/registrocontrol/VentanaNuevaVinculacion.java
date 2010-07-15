@@ -11,7 +11,7 @@
 
 package registrocontrol;
 
-import clases.Vinculacion;
+import registrocontrol.clases.Vinculacion;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceException;
 import registrocontrol.lib.Mensajes;

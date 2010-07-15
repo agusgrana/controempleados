@@ -11,9 +11,9 @@
 
 package registrocontrol;
 
-import clases.Empleado;
-import clases.Historialaboral;
-import clases.Huellas;
+import registrocontrol.clases.Empleado;
+import registrocontrol.clases.Historialaboral;
+import registrocontrol.clases.Huellas;
 import java.awt.Component;
 import java.util.List;
 import javax.persistence.Query;
@@ -110,6 +110,11 @@ public class PanelListaEmpleados extends javax.swing.JPanel {
         jButton3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton3.setName("jButton3"); // NOI18N
         jButton3.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
         jToolBar1.add(jButton3);
 
         jButton4.setText(resourceMap.getString("jButton4.text")); // NOI18N
@@ -176,7 +181,6 @@ public class PanelListaEmpleados extends javax.swing.JPanel {
         jTable1.getColumnModel().getColumn(3).setHeaderValue(resourceMap.getString("jTable1.columnModel.title3")); // NOI18N
         jTable1.getColumnModel().getColumn(3).setCellRenderer(new ConversorCargo());
         jTable1.getColumnModel().getColumn(4).setHeaderValue(resourceMap.getString("jTable1.columnModel.title10")); // NOI18N
-        jTable1.getColumnModel().getColumn(4).setCellRenderer(null);
         jTable1.getColumnModel().getColumn(5).setHeaderValue(resourceMap.getString("jTable1.columnModel.title5")); // NOI18N
         jTable1.getColumnModel().getColumn(5).setCellRenderer(new ConversorHuellas());
 
@@ -224,9 +228,18 @@ public class PanelListaEmpleados extends javax.swing.JPanel {
             }
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+            try{
+                Empleado empleado = empleadoList.get(jTable1.getSelectedRow());
+                registroControlView.cambiarPanelPrincipal(new PanelHuellas(registroControlView,empleado));
+            }catch(IndexOutOfBoundsException ie){
+                Mensajes.Error(this, "Seleccione el empleado a modificar");
+            }
+    }//GEN-LAST:event_jButton3ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private java.util.List<clases.Empleado> empleadoList;
+    private java.util.List<registrocontrol.clases.Empleado> empleadoList;
     private javax.persistence.Query empleadoQuery;
     private javax.persistence.EntityManager entityManager;
     private javax.swing.JButton jButton1;

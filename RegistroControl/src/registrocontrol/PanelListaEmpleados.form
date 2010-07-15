@@ -22,7 +22,7 @@
         </Property>
       </Properties>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;clases.Empleado&gt;"/>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;registrocontrol.clases.Empleado&gt;"/>
       </AuxValues>
     </Component>
   </NonVisualComponents>
@@ -138,6 +138,9 @@
                     <Property name="name" type="java.lang.String" value="jButton3" noResource="true"/>
                     <Property name="verticalTextPosition" type="int" value="3"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton3ActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="jButton4">
                   <Properties>
@@ -213,9 +216,7 @@
                         <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                           <Title resourceKey="jTable1.columnModel.title10"/>
                           <Editor/>
-                          <Renderer editor="org.netbeans.modules.form.ComponentChooserEditor">
-                            <ComponentRef name="null"/>
-                          </Renderer>
+                          <Renderer/>
                         </Column>
                         <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                           <Title resourceKey="jTable1.columnModel.title5"/>
