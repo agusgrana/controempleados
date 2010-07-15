@@ -23,7 +23,7 @@ import javax.swing.JPanel;
  */
 public class RegistroControlView extends FrameView {
 
-    public JPanel principal;
+    private JPanel principal;
 
     public RegistroControlView(SingleFrameApplication app) {
         super(app);

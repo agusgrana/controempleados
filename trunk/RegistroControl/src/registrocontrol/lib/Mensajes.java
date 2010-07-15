@@ -22,5 +22,9 @@ public class Mensajes {
         else return false;
     }
 
+    public static String In(String mensaje){
+        return JOptionPane.showInputDialog(mensaje);
+    }
+
 
 }

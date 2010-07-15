@@ -64,13 +64,16 @@
         <Container class="javax.swing.JPanel" name="jPanel1">
           <Properties>
             <Property name="name" type="java.lang.String" value="jPanel1" noResource="true"/>
+            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[800, 346]"/>
+            </Property>
           </Properties>
 
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jScrollPane2" alignment="0" pref="535" max="32767" attributes="1"/>
-                  <Component id="jToolBar1" alignment="0" pref="535" max="32767" attributes="1"/>
+                  <Component id="jScrollPane2" alignment="0" pref="800" max="32767" attributes="1"/>
+                  <Component id="jToolBar1" alignment="0" pref="800" max="32767" attributes="1"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
