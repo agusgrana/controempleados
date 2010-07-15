@@ -72,7 +72,7 @@ public class PanelHistoLaboral extends javax.swing.JPanel {
         columnBinding.setColumnClass(Integer.class);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${empleado}"));
         columnBinding.setColumnName("Empleado");
-        columnBinding.setColumnClass(clases.Empleado.class);
+        columnBinding.setColumnClass(registrocontrol.clases.Empleado.class);
         bindingGroup.addBinding(jTableBinding);
         jTableBinding.bind();
         jScrollPane1.setViewportView(jTable1);
@@ -121,7 +121,7 @@ public class PanelHistoLaboral extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.persistence.EntityManager RPUEntityManager;
-    private java.util.List<clases.Historialaboral> historialaboralList;
+    private java.util.List<registrocontrol.clases.Historialaboral> historialaboralList;
     private javax.persistence.Query historialaboralQuery;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;

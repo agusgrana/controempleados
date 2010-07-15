@@ -12,7 +12,7 @@
 package registrocontrol;
 
 import java.awt.Component;
-import clases.Vinculacion;
+import registrocontrol.clases.Vinculacion;
 import javax.persistence.PersistenceException;
 import javax.swing.JLabel;
 import javax.swing.JTable;
@@ -239,7 +239,7 @@ public class PanelVinculacion extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTable tablaVincu;
-    private java.util.List<clases.Vinculacion> vinculacionList;
+    private java.util.List<registrocontrol.clases.Vinculacion> vinculacionList;
     private javax.persistence.Query vinculacionQuery;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
