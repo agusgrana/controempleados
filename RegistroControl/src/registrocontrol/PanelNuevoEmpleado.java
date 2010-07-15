@@ -10,7 +10,10 @@ import registrocontrol.clases.Empleado;
 import registrocontrol.clases.Historialaboral;
 import registrocontrol.clases.Vinculacion;
 import java.awt.Component;
+import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.geom.AffineTransform;
+import java.awt.image.BufferedImage;
 import java.awt.image.RenderedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -30,7 +33,6 @@ import javax.swing.JList;
 import javax.swing.JTextField;
 import javax.swing.ListCellRenderer;
 import javax.swing.filechooser.FileFilter;
-import registrocontrol.lib.Imagen;
 import registrocontrol.lib.Mensajes;
 import registrocontrol.lib.Valida;
 
@@ -283,7 +285,8 @@ public class PanelNuevoEmpleado extends javax.swing.JPanel {
         if(vinculacionList.isEmpty()){
             Mensajes.Error(this, "No se pueden ingresar empleados si"
                 + " no existen tipos de vinculación");
-            campoVinculacion.setEnabled(false);
+            this.setVisible(false);
+            registroControlView.cambiarPanelPrincipal(new PanelVinculacion(registroControlView));
         }
         else{
             campoVinculacion.setRenderer(new VinculacionCellRenderer());
@@ -720,8 +723,25 @@ public class PanelNuevoEmpleado extends javax.swing.JPanel {
     
     public Image selecFoto(boolean b){
         try {
-            if(b)
-                return Imagen.scale(escogeImagen.getSelectedFile(), 175, 175, true, false);
+            if(b){
+                BufferedImage bfi = ImageIO.read(escogeImagen.getSelectedFile());
+                int width=175;
+                if(bfi.getHeight()!=175){
+                    width = (bfi.getWidth()*175)/bfi.getHeight();
+                }
+                BufferedImage dest = new BufferedImage(width, 175, bfi.getTransparency());
+                Graphics2D g = dest.createGraphics();
+                BufferedImage image;
+                Image temp1=null;
+                temp1 = bfi.getScaledInstance(width, 175, java.awt.Image.SCALE_SMOOTH);
+                image = new BufferedImage(width, 175, bfi.getTransparency());
+                image.getGraphics().drawImage(temp1, 0, 0, null);
+                AffineTransform at = AffineTransform.getScaleInstance((double) width/bfi.getWidth(), (double) 175 / bfi.getHeight());
+                g.drawRenderedImage(bfi, at);
+                return image;
+
+            }
+                //return Imagen.scale(escogeImagen.getSelectedFile(), 175, 175, true, false);
             else{
                 return javax.imageio.ImageIO.read(getClass().getResource("/registrocontrol/resources/foto.png").openStream());
             }
