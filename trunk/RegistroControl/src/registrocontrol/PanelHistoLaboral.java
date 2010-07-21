@@ -33,8 +33,8 @@ public class PanelHistoLaboral extends javax.swing.JPanel {
         bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(registrocontrol.RegistroControlApp.class).getContext().getResourceMap(PanelHistoLaboral.class);
-        RPUEntityManager = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory(resourceMap.getString("RPUEntityManager.persistenceUnit")).createEntityManager(); // NOI18N
-        historialaboralQuery = java.beans.Beans.isDesignTime() ? null : RPUEntityManager.createQuery("SELECT h FROM Historialaboral h");
+        EMPLEADITOSPUEntityManager = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory(resourceMap.getString("EMPLEADITOSPUEntityManager.persistenceUnit")).createEntityManager(); // NOI18N
+        historialaboralQuery = java.beans.Beans.isDesignTime() ? null : EMPLEADITOSPUEntityManager.createQuery("SELECT h FROM Historialaboral h");
         historialaboralList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : historialaboralQuery.getResultList();
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
@@ -58,30 +58,26 @@ public class PanelHistoLaboral extends javax.swing.JPanel {
         org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${cargo}"));
         columnBinding.setColumnName("Cargo");
         columnBinding.setColumnClass(String.class);
+        columnBinding.setEditable(false);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${fechaInicio}"));
         columnBinding.setColumnName("Fecha Inicio");
         columnBinding.setColumnClass(java.util.Date.class);
+        columnBinding.setEditable(false);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${fechaSalida}"));
         columnBinding.setColumnName("Fecha Salida");
         columnBinding.setColumnClass(java.util.Date.class);
+        columnBinding.setEditable(false);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${salarioBase}"));
         columnBinding.setColumnName("Salario Base");
         columnBinding.setColumnClass(Integer.class);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${valorHoraExtra}"));
-        columnBinding.setColumnName("Valor Hora Extra");
-        columnBinding.setColumnClass(Integer.class);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${empleado}"));
-        columnBinding.setColumnName("Empleado");
-        columnBinding.setColumnClass(registrocontrol.clases.Empleado.class);
+        columnBinding.setEditable(false);
         bindingGroup.addBinding(jTableBinding);
         jTableBinding.bind();
         jScrollPane1.setViewportView(jTable1);
-        jTable1.getColumnModel().getColumn(0).setHeaderValue(resourceMap.getString("jTable1.columnModel.title1")); // NOI18N
-        jTable1.getColumnModel().getColumn(1).setHeaderValue(resourceMap.getString("jTable1.columnModel.title2")); // NOI18N
-        jTable1.getColumnModel().getColumn(2).setHeaderValue(resourceMap.getString("jTable1.columnModel.title3")); // NOI18N
-        jTable1.getColumnModel().getColumn(3).setHeaderValue(resourceMap.getString("jTable1.columnModel.title4")); // NOI18N
-        jTable1.getColumnModel().getColumn(4).setHeaderValue(resourceMap.getString("jTable1.columnModel.title5")); // NOI18N
-        jTable1.getColumnModel().getColumn(5).setHeaderValue(resourceMap.getString("jTable1.columnModel.title6")); // NOI18N
+        jTable1.getColumnModel().getColumn(0).setHeaderValue(resourceMap.getString("jTable1.columnModel.title2")); // NOI18N
+        jTable1.getColumnModel().getColumn(1).setHeaderValue(resourceMap.getString("jTable1.columnModel.title3")); // NOI18N
+        jTable1.getColumnModel().getColumn(2).setHeaderValue(resourceMap.getString("jTable1.columnModel.title4")); // NOI18N
+        jTable1.getColumnModel().getColumn(3).setHeaderValue(resourceMap.getString("jTable1.columnModel.title5")); // NOI18N
 
         jButton2.setText(resourceMap.getString("jButton2.text")); // NOI18N
         jButton2.setName("jButton2"); // NOI18N
@@ -120,7 +116,7 @@ public class PanelHistoLaboral extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.persistence.EntityManager RPUEntityManager;
+    private javax.persistence.EntityManager EMPLEADITOSPUEntityManager;
     private java.util.List<registrocontrol.clases.Historialaboral> historialaboralList;
     private javax.persistence.Query historialaboralQuery;
     private javax.swing.JButton jButton1;
