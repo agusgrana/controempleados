@@ -51,7 +51,7 @@ public class PanelListaEmpleados extends javax.swing.JPanel {
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(registrocontrol.RegistroControlApp.class).getContext().getResourceMap(PanelListaEmpleados.class);
         entityManager = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory(resourceMap.getString("entityManager.persistenceUnit")).createEntityManager(); // NOI18N
         empleadoQuery = java.beans.Beans.isDesignTime() ? null : entityManager.createQuery("SELECT e FROM Empleado e");
-        empleadoList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : empleadoQuery.getResultList();
+        empleadoList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : org.jdesktop.observablecollections.ObservableCollections.observableList(empleadoQuery.getResultList());
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
         jToolBar1 = new javax.swing.JToolBar();
@@ -135,9 +135,13 @@ public class PanelListaEmpleados extends javax.swing.JPanel {
 
         jButton5.setText(resourceMap.getString("jButton5.text")); // NOI18N
         jButton5.setFocusable(false);
-        jButton5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton5.setName("jButton5"); // NOI18N
+        jButton5.setFocusable(false);
         jButton5.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
         jToolBar1.add(jButton5);
 
         jButton6.setText(resourceMap.getString("jButton6.text")); // NOI18N
@@ -252,6 +256,15 @@ public class PanelListaEmpleados extends javax.swing.JPanel {
             }
     }//GEN-LAST:event_jButton4ActionPerformed
 
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+            try{
+                Empleado empleado = empleadoList.get(jTable1.getSelectedRow());
+                registroControlView.cambiarPanelPrincipal(new PanelHistoLaboral(registroControlView,empleado));
+            }catch(IndexOutOfBoundsException ie){
+                Mensajes.Error(this, "Seleccione el empleado a modificar");
+            }
+    }//GEN-LAST:event_jButton5ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private java.util.List<registrocontrol.clases.Empleado> empleadoList;
@@ -288,6 +301,8 @@ public class PanelListaEmpleados extends javax.swing.JPanel {
                     if(historialaboral.getFechaSalida()==null){
                         jlabel.setText(historialaboral.getCargo());
                         break;
+                    }else{
+                        jlabel.setText("Inactivo");
                     }
            }
            return jlabel;
