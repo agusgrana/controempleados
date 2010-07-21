@@ -3,6 +3,8 @@
  * and open the template in the editor.
  */
 
+/* @NamedQuery(name = "Empleado.findByIdEmpleadoActivo", query = "SELECT e FROM Empleado e JOIN Historialaboral h WHERE e.idEmpleado = h.idEmpleado AND h.fechaSalida = NULL") */
+
 package registrocontrol.clases;
 
 import java.io.Serializable;

@@ -17,7 +17,6 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Locale;
 import javax.imageio.ImageIO;
 import javax.persistence.PersistenceException;
 import javax.swing.ImageIcon;
