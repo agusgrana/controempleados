@@ -16,6 +16,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
+import javax.persistence.PersistenceException;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.JLabel;
@@ -23,6 +25,7 @@ import javax.swing.JList;
 import javax.swing.ListCellRenderer;
 import registrocontrol.clases.Empleado;
 import registrocontrol.clases.Horario;
+import registrocontrol.clases.Turnos;
 import registrocontrol.lib.Mensajes;
 
 /**
@@ -44,7 +47,7 @@ public class PanelTurnos extends javax.swing.JPanel {
         for(int i=0; i<=empleadoList.size(); i++)
             listas.add(new ArrayList<Empleado>());
         listaActual = listas.get(0);
-        campoListaTurnos.setModel(new DefaultComboBoxModel(horarioList.toArray()));
+        campoListaHorarios.setModel(new DefaultComboBoxModel(horarioList.toArray()));
         //verificarMeses();
         redibujarListas();
     }
@@ -76,7 +79,7 @@ public class PanelTurnos extends javax.swing.JPanel {
         campoEmpleadosDispo = new javax.swing.JList();
         labelEmpleadosDisp = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        campoListaTurnos = new javax.swing.JComboBox();
+        campoListaHorarios = new javax.swing.JComboBox();
         jScrollPane3 = new javax.swing.JScrollPane();
         campoEmpleadosAct = new javax.swing.JList();
         labelEmpleadosAct = new javax.swing.JLabel();
@@ -88,6 +91,7 @@ public class PanelTurnos extends javax.swing.JPanel {
         jSeparator3 = new javax.swing.JSeparator();
         campoMeses = new javax.swing.JComboBox();
         campoAnho = new javax.swing.JComboBox();
+        jButton5 = new javax.swing.JButton();
 
         setName("Form"); // NOI18N
 
@@ -119,14 +123,14 @@ public class PanelTurnos extends javax.swing.JPanel {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE)
                     .addComponent(labelEmpleadosDisp))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 331, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 328, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(labelEmpleadosDisp))
         );
@@ -134,11 +138,11 @@ public class PanelTurnos extends javax.swing.JPanel {
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap.getString("jPanel3.border.title"))); // NOI18N
         jPanel3.setName("jPanel3"); // NOI18N
 
-        campoListaTurnos.setName("campoListaTurnos"); // NOI18N
-        campoListaTurnos.setRenderer(new RenderHorarios());
-        campoListaTurnos.addActionListener(new java.awt.event.ActionListener() {
+        campoListaHorarios.setName("campoListaHorarios"); // NOI18N
+        campoListaHorarios.setRenderer(new RenderHorarios());
+        campoListaHorarios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                campoListaTurnosActionPerformed(evt);
+                campoListaHorariosActionPerformed(evt);
             }
         });
 
@@ -158,17 +162,17 @@ public class PanelTurnos extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
                     .addComponent(labelEmpleadosAct, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(campoListaTurnos, javax.swing.GroupLayout.Alignment.LEADING, 0, 192, Short.MAX_VALUE))
+                    .addComponent(campoListaHorarios, javax.swing.GroupLayout.Alignment.LEADING, 0, 196, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(campoListaTurnos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(campoListaHorarios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 305, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 302, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(labelEmpleadosAct))
         );
@@ -234,6 +238,14 @@ public class PanelTurnos extends javax.swing.JPanel {
             }
         });
 
+        jButton5.setText(resourceMap.getString("jButton5.text")); // NOI18N
+        jButton5.setName("jButton5"); // NOI18N
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -259,7 +271,9 @@ public class PanelTurnos extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(campoAnho, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(campoMeses, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(campoMeses, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton5)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -269,7 +283,8 @@ public class PanelTurnos extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(campoAnho, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(campoMeses, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(campoMeses, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -319,14 +334,14 @@ public class PanelTurnos extends javax.swing.JPanel {
         cambiarValoresListas(campoEmpleadosAct, listaActual, empleadoList);
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void campoListaTurnosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoListaTurnosActionPerformed
+    private void campoListaHorariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoListaHorariosActionPerformed
         try{
-            listaActual = listas.get(campoListaTurnos.getSelectedIndex());
+            listaActual = listas.get(campoListaHorarios.getSelectedIndex());
             redibujarListas();
         }catch(Exception e){
             System.out.println(e);
         }
-    }//GEN-LAST:event_campoListaTurnosActionPerformed
+    }//GEN-LAST:event_campoListaHorariosActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         pasarListaCompleta(empleadoList,listaActual);
@@ -345,6 +360,40 @@ public class PanelTurnos extends javax.swing.JPanel {
         }
         
     }//GEN-LAST:event_campoAnhoActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        try{
+        if(Mensajes.Confirm(this, "¿Está seguro de guardar los turnos?")){
+        entityManager.getTransaction().begin();
+        for(int i=0;i<12;i++){
+            String mesSelec = campoMeses.getSelectedItem().toString();
+            Calendar cal = Calendar.getInstance();
+            cal.set(Calendar.MONTH, Calendar.JANUARY+i);
+            if(mesSelec.equals(cal.getDisplayName(Calendar.MONTH, Calendar.LONG, getDefaultLocale()))){
+                fechaTurno.set(Calendar.MONTH, cal.get(Calendar.MONTH));
+                break;
+            }
+        }
+        for(int i=0; i<listas.size(); i++){
+            List<Empleado> listica = listas.get(i);
+            for (Iterator<Empleado> it = listica.iterator(); it.hasNext();) {
+                Empleado empleado = it.next();
+                Turnos turno = new Turnos();
+                turno.setEmpleado(empleado);
+                turno.setHorario(horarioList.get(i));
+                turno.setFecha(fechaTurno.getTime());
+                entityManager.persist(turno);
+            }
+        }
+        entityManager.getTransaction().commit();
+        Mensajes.Ok(this, "Turnos Guardados Satisfactoriamente");
+        registroControlView.cambiarPanelPrincipal(new PanelListaEmpleados(registroControlView));
+        }
+        }catch(PersistenceException pe){
+            Mensajes.Error(this, "No se pudieron guardar los turnos");
+            entityManager.getTransaction().commit();
+        }
+    }//GEN-LAST:event_jButton5ActionPerformed
     
     private void pasarListaCompleta(List origen, List destino){
         for (Iterator it = origen.iterator(); it.hasNext();) {
@@ -386,7 +435,7 @@ public class PanelTurnos extends javax.swing.JPanel {
     private javax.swing.JComboBox campoAnho;
     private javax.swing.JList campoEmpleadosAct;
     private javax.swing.JList campoEmpleadosDispo;
-    private javax.swing.JComboBox campoListaTurnos;
+    private javax.swing.JComboBox campoListaHorarios;
     private javax.swing.JComboBox campoMeses;
     private java.util.List<registrocontrol.clases.Empleado> empleadoList;
     private javax.persistence.Query empleadoQuery;
@@ -397,6 +446,7 @@ public class PanelTurnos extends javax.swing.JPanel {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
