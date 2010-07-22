@@ -13,6 +13,7 @@ package registrocontrol;
 
 import java.awt.Component;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Iterator;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
@@ -33,15 +34,18 @@ public class PanelTurnos extends javax.swing.JPanel {
     RegistroControlView registroControlView;
     private List<List<Empleado>> listas = new ArrayList<List<Empleado>>();
     private List<Empleado> listaActual;
+    private Calendar fechaTurno;
     /** Creates new form PanelTurnos */
     
     PanelTurnos(RegistroControlView registroControlView) {
         this.registroControlView=registroControlView;
+        fechaTurno = Calendar.getInstance();
         initComponents();
         for(int i=0; i<=empleadoList.size(); i++)
             listas.add(new ArrayList<Empleado>());
         listaActual = listas.get(0);
         campoListaTurnos.setModel(new DefaultComboBoxModel(horarioList.toArray()));
+        //verificarMeses();
         redibujarListas();
     }
 
@@ -53,13 +57,16 @@ public class PanelTurnos extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(registrocontrol.RegistroControlApp.class).getContext().getResourceMap(PanelTurnos.class);
         entityManager = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory(resourceMap.getString("entityManager.persistenceUnit")).createEntityManager(); // NOI18N
-        empleadoQuery = java.beans.Beans.isDesignTime() ? null : entityManager.createQuery("SELECT e FROM Empleado e");
+        empleadoQuery = entityManager.createNamedQuery("Empleado.findAllActivo");
         empleadoList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : org.jdesktop.observablecollections.ObservableCollections.observableList(empleadoQuery.getResultList());
         horarioQuery = java.beans.Beans.isDesignTime() ? null : entityManager.createQuery("SELECT h FROM Horario h");
         horarioList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : horarioQuery.getResultList();
+        meses = getMeses();
+        anhos = getAnhos();
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -79,6 +86,8 @@ public class PanelTurnos extends javax.swing.JPanel {
         jButton4 = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JSeparator();
         jSeparator3 = new javax.swing.JSeparator();
+        campoMeses = new javax.swing.JComboBox();
+        campoAnho = new javax.swing.JComboBox();
 
         setName("Form"); // NOI18N
 
@@ -117,7 +126,7 @@ public class PanelTurnos extends javax.swing.JPanel {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 337, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 331, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(labelEmpleadosDisp))
         );
@@ -159,7 +168,7 @@ public class PanelTurnos extends javax.swing.JPanel {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addComponent(campoListaTurnos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 311, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 305, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(labelEmpleadosAct))
         );
@@ -209,6 +218,22 @@ public class PanelTurnos extends javax.swing.JPanel {
 
         jSeparator3.setName("jSeparator3"); // NOI18N
 
+        campoMeses.setName("campoMeses"); // NOI18N
+
+        org.jdesktop.swingbinding.JComboBoxBinding jComboBoxBinding = org.jdesktop.swingbinding.SwingBindings.createJComboBoxBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, meses, campoMeses);
+        bindingGroup.addBinding(jComboBoxBinding);
+
+        campoAnho.setName("campoAnho"); // NOI18N
+
+        jComboBoxBinding = org.jdesktop.swingbinding.SwingBindings.createJComboBoxBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, anhos, campoAnho);
+        bindingGroup.addBinding(jComboBoxBinding);
+
+        campoAnho.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                campoAnhoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -229,14 +254,22 @@ public class PanelTurnos extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 550, Short.MAX_VALUE)
-                    .addComponent(jLabel1))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(campoAnho, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(campoMeses, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(campoAnho, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(campoMeses, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -274,6 +307,8 @@ public class PanelTurnos extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 444, Short.MAX_VALUE)
         );
+
+        bindingGroup.bind();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -301,6 +336,16 @@ public class PanelTurnos extends javax.swing.JPanel {
         pasarListaCompleta(listaActual, empleadoList);
     }//GEN-LAST:event_jButton4ActionPerformed
 
+    private void campoAnhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoAnhoActionPerformed
+        try{
+            fechaTurno.set(Calendar.YEAR, Integer.parseInt(campoAnho.getSelectedItem().toString()));
+            campoMeses.setModel(new DefaultComboBoxModel(getMeses().toArray()));
+        }catch(Exception e){
+            System.out.println(e);
+        }
+        
+    }//GEN-LAST:event_campoAnhoActionPerformed
+    
     private void pasarListaCompleta(List origen, List destino){
         for (Iterator it = origen.iterator(); it.hasNext();) {
             Object object = it.next();
@@ -337,9 +382,12 @@ public class PanelTurnos extends javax.swing.JPanel {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private java.util.List anhos;
+    private javax.swing.JComboBox campoAnho;
     private javax.swing.JList campoEmpleadosAct;
     private javax.swing.JList campoEmpleadosDispo;
     private javax.swing.JComboBox campoListaTurnos;
+    private javax.swing.JComboBox campoMeses;
     private java.util.List<registrocontrol.clases.Empleado> empleadoList;
     private javax.persistence.Query empleadoQuery;
     private javax.persistence.EntityManager entityManager;
@@ -361,8 +409,31 @@ public class PanelTurnos extends javax.swing.JPanel {
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JLabel labelEmpleadosAct;
     private javax.swing.JLabel labelEmpleadosDisp;
+    private java.util.List meses;
+    private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 
+
+    private List getMeses(){
+        Calendar cal = Calendar.getInstance();
+        java.util.List listica = new ArrayList();
+        int mesInicial = 0;
+        if(fechaTurno.get(Calendar.YEAR)==cal.get(Calendar.YEAR))
+            mesInicial = fechaTurno.get(Calendar.MONTH)+1;
+        for(int i=mesInicial;i<12;i++){
+            cal.set(Calendar.MONTH, i);
+            listica.add(cal.getDisplayName(Calendar.MONTH, Calendar.LONG, getDefaultLocale()));
+        }
+        return listica;
+    }
+
+    private List getAnhos(){
+        int anho = fechaTurno.get(Calendar.YEAR);
+        java.util.List listica = new ArrayList();
+        listica.add(anho);
+        listica.add(anho+1);
+        return listica;
+    }
 
     class RenderEmpleados implements ListCellRenderer{
         public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
