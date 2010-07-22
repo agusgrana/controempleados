@@ -128,6 +128,8 @@
                               <Component id="campoAnho" min="-2" pref="68" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="campoMeses" min="-2" pref="133" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jButton5" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -142,6 +144,7 @@
                           <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="campoAnho" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="campoMeses" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jButton5" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Component id="jSeparator1" min="-2" pref="10" max="-2" attributes="0"/>
@@ -204,7 +207,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jScrollPane2" alignment="0" pref="181" max="32767" attributes="0"/>
+                              <Component id="jScrollPane2" alignment="0" pref="185" max="32767" attributes="0"/>
                               <Component id="labelEmpleadosDisp" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
@@ -214,7 +217,7 @@
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
-                          <Component id="jScrollPane2" pref="331" max="32767" attributes="0"/>
+                          <Component id="jScrollPane2" pref="328" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="labelEmpleadosDisp" min="-2" max="-2" attributes="0"/>
                       </Group>
@@ -268,9 +271,9 @@
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="jScrollPane3" alignment="0" pref="192" max="32767" attributes="0"/>
+                              <Component id="jScrollPane3" alignment="0" pref="196" max="32767" attributes="0"/>
                               <Component id="labelEmpleadosAct" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="campoListaTurnos" alignment="0" pref="192" max="32767" attributes="0"/>
+                              <Component id="campoListaHorarios" alignment="0" pref="196" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
@@ -279,9 +282,9 @@
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="campoListaTurnos" min="-2" max="-2" attributes="0"/>
+                          <Component id="campoListaHorarios" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jScrollPane3" pref="305" max="32767" attributes="0"/>
+                          <Component id="jScrollPane3" pref="302" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="labelEmpleadosAct" min="-2" max="-2" attributes="0"/>
                       </Group>
@@ -289,15 +292,15 @@
                 </DimensionLayout>
               </Layout>
               <SubComponents>
-                <Component class="javax.swing.JComboBox" name="campoListaTurnos">
+                <Component class="javax.swing.JComboBox" name="campoListaHorarios">
                   <Properties>
-                    <Property name="name" type="java.lang.String" value="campoListaTurnos" noResource="true"/>
+                    <Property name="name" type="java.lang.String" value="campoListaHorarios" noResource="true"/>
                     <Property name="renderer" type="javax.swing.ListCellRenderer" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                       <Connection code="new RenderHorarios()" type="code"/>
                     </Property>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="campoListaTurnosActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="campoListaHorariosActionPerformed"/>
                   </Events>
                 </Component>
                 <Container class="javax.swing.JScrollPane" name="jScrollPane3">
@@ -403,6 +406,15 @@
               </BindingProperties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="campoAnhoActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="jButton5">
+              <Properties>
+                <Property name="text" type="java.lang.String" resourceKey="jButton5.text"/>
+                <Property name="name" type="java.lang.String" value="jButton5" noResource="true"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton5ActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>
