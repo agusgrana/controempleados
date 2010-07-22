@@ -5,6 +5,8 @@
 
 package registrocontrol.clases;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -21,6 +23,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 /**
  *
@@ -35,6 +38,8 @@ import javax.persistence.TemporalType;
     @NamedQuery(name = "Horario.findByHoraEntrada", query = "SELECT h FROM Horario h WHERE h.horaEntrada = :horaEntrada"),
     @NamedQuery(name = "Horario.findByHoraSalida", query = "SELECT h FROM Horario h WHERE h.horaSalida = :horaSalida")})
 public class Horario implements Serializable {
+    @Transient
+    private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -74,7 +79,9 @@ public class Horario implements Serializable {
     }
 
     public void setIdHorarios(Integer idHorarios) {
+        Integer oldIdHorarios = this.idHorarios;
         this.idHorarios = idHorarios;
+        changeSupport.firePropertyChange("idHorarios", oldIdHorarios, idHorarios);
     }
 
     public String getNombreHorario() {
@@ -82,7 +89,9 @@ public class Horario implements Serializable {
     }
 
     public void setNombreHorario(String nombreHorario) {
+        String oldNombreHorario = this.nombreHorario;
         this.nombreHorario = nombreHorario;
+        changeSupport.firePropertyChange("nombreHorario", oldNombreHorario, nombreHorario);
     }
 
     public Date getHoraEntrada() {
@@ -90,7 +99,9 @@ public class Horario implements Serializable {
     }
 
     public void setHoraEntrada(Date horaEntrada) {
+        Date oldHoraEntrada = this.horaEntrada;
         this.horaEntrada = horaEntrada;
+        changeSupport.firePropertyChange("horaEntrada", oldHoraEntrada, horaEntrada);
     }
 
     public Date getHoraSalida() {
@@ -98,7 +109,9 @@ public class Horario implements Serializable {
     }
 
     public void setHoraSalida(Date horaSalida) {
+        Date oldHoraSalida = this.horaSalida;
         this.horaSalida = horaSalida;
+        changeSupport.firePropertyChange("horaSalida", oldHoraSalida, horaSalida);
     }
 
     public List<Turnos> getTurnosList() {
@@ -132,6 +145,14 @@ public class Horario implements Serializable {
     @Override
     public String toString() {
         return "clases.Horario[idHorarios=" + idHorarios + "]";
+    }
+
+    public void addPropertyChangeListener(PropertyChangeListener listener) {
+        changeSupport.addPropertyChangeListener(listener);
+    }
+
+    public void removePropertyChangeListener(PropertyChangeListener listener) {
+        changeSupport.removePropertyChangeListener(listener);
     }
 
 }
