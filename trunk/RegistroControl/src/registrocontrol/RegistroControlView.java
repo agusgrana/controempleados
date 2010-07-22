@@ -109,9 +109,6 @@ public class RegistroControlView extends FrameView {
         mainPanel = new javax.swing.JPanel();
         menuBar = new javax.swing.JMenuBar();
         jMenu3 = new javax.swing.JMenu();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem7 = new javax.swing.JMenuItem();
-        jMenuItem13 = new javax.swing.JMenuItem();
         javax.swing.JMenuItem exitMenuItem = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem9 = new javax.swing.JMenuItem();
@@ -121,6 +118,10 @@ public class RegistroControlView extends FrameView {
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
+        jMenu4 = new javax.swing.JMenu();
+        jMenuItem6 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem10 = new javax.swing.JMenuItem();
         javax.swing.JMenu helpMenu = new javax.swing.JMenu();
         javax.swing.JMenuItem aboutMenuItem = new javax.swing.JMenuItem();
         statusPanel = new javax.swing.JPanel();
@@ -139,7 +140,7 @@ public class RegistroControlView extends FrameView {
         );
         mainPanelLayout.setVerticalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 254, Short.MAX_VALUE)
+            .addGap(0, 249, Short.MAX_VALUE)
         );
 
         menuBar.setName("menuBar"); // NOI18N
@@ -148,29 +149,18 @@ public class RegistroControlView extends FrameView {
         jMenu3.setText(resourceMap.getString("jMenu3.text")); // NOI18N
         jMenu3.setName("jMenu3"); // NOI18N
 
-        jMenuItem2.setText(resourceMap.getString("jMenuItem2.text")); // NOI18N
-        jMenuItem2.setName("jMenuItem2"); // NOI18N
-        jMenu3.add(jMenuItem2);
-
-        jMenuItem7.setText(resourceMap.getString("jMenuItem7.text")); // NOI18N
-        jMenuItem7.setName("jMenuItem7"); // NOI18N
-        jMenu3.add(jMenuItem7);
-
-        jMenuItem13.setText(resourceMap.getString("jMenuItem13.text")); // NOI18N
-        jMenuItem13.setName("jMenuItem13"); // NOI18N
-        jMenu3.add(jMenuItem13);
-
         javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(registrocontrol.RegistroControlApp.class).getContext().getActionMap(RegistroControlView.class, this);
         exitMenuItem.setAction(actionMap.get("quit")); // NOI18N
+        exitMenuItem.setIcon(resourceMap.getIcon("exitMenuItem.icon")); // NOI18N
         exitMenuItem.setName("exitMenuItem"); // NOI18N
         jMenu3.add(exitMenuItem);
 
         menuBar.add(jMenu3);
 
         jMenu2.setText(resourceMap.getString("jMenu2.text")); // NOI18N
-        jMenu2.setName("jMenu2"); // NOI18N
 
         jMenuItem9.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem9.setIcon(resourceMap.getIcon("jMenuItem9.icon")); // NOI18N
         jMenuItem9.setText(resourceMap.getString("jMenuItem9.text")); // NOI18N
         jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -180,6 +170,7 @@ public class RegistroControlView extends FrameView {
         jMenu2.add(jMenuItem9);
 
         jMenuItem14.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem14.setIcon(resourceMap.getIcon("jMenuItem14.icon")); // NOI18N
         jMenuItem14.setText(resourceMap.getString("jMenuItem14.text")); // NOI18N
         jMenuItem14.setName("jMenuItem14"); // NOI18N
         jMenuItem14.addActionListener(new java.awt.event.ActionListener() {
@@ -192,14 +183,14 @@ public class RegistroControlView extends FrameView {
         menuBar.add(jMenu2);
 
         jMenu1.setText(resourceMap.getString("jMenu1.text")); // NOI18N
-        jMenu1.setName("jMenu1"); // NOI18N
 
         jMenuItem8.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem8.setIcon(resourceMap.getIcon("jMenuItem8.icon")); // NOI18N
         jMenuItem8.setText(resourceMap.getString("jMenuItem8.text")); // NOI18N
-        jMenuItem8.setName("jMenuItem8"); // NOI18N
         jMenu1.add(jMenuItem8);
 
         jMenuItem3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_H, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem3.setIcon(resourceMap.getIcon("jMenuItem3.icon")); // NOI18N
         jMenuItem3.setText(resourceMap.getString("jMenuItem3.text")); // NOI18N
         jMenuItem3.setName("jMenuItem3"); // NOI18N
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
@@ -210,6 +201,7 @@ public class RegistroControlView extends FrameView {
         jMenu1.add(jMenuItem3);
 
         jMenuItem4.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem4.setIcon(resourceMap.getIcon("jMenuItem4.icon")); // NOI18N
         jMenuItem4.setText(resourceMap.getString("jMenuItem4.text")); // NOI18N
         jMenuItem4.setName("jMenuItem4"); // NOI18N
         jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
@@ -220,7 +212,9 @@ public class RegistroControlView extends FrameView {
         jMenu1.add(jMenuItem4);
 
         jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_B, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem1.setIcon(resourceMap.getIcon("jMenuItem1.icon")); // NOI18N
         jMenuItem1.setText(resourceMap.getString("jMenuItem1.text")); // NOI18N
+        jMenuItem1.setName("jMenuItem1"); // NOI18N
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem1ActionPerformed(evt);
@@ -230,9 +224,30 @@ public class RegistroControlView extends FrameView {
 
         menuBar.add(jMenu1);
 
+        jMenu4.setText(resourceMap.getString("jMenu4.text")); // NOI18N
+
+        jMenuItem6.setIcon(resourceMap.getIcon("jMenuItem6.icon")); // NOI18N
+        jMenuItem6.setText(resourceMap.getString("jMenuItem6.text")); // NOI18N
+        jMenuItem6.setName("jMenuItem6"); // NOI18N
+        jMenu4.add(jMenuItem6);
+
+        jMenuItem2.setIcon(resourceMap.getIcon("jMenuItem2.icon")); // NOI18N
+        jMenuItem2.setText(resourceMap.getString("jMenuItem2.text")); // NOI18N
+        jMenuItem2.setName("jMenuItem2"); // NOI18N
+        jMenu4.add(jMenuItem2);
+
+        jMenuItem10.setIcon(resourceMap.getIcon("jMenuItem10.icon")); // NOI18N
+        jMenuItem10.setText(resourceMap.getString("jMenuItem10.text")); // NOI18N
+        jMenuItem10.setName("jMenuItem10"); // NOI18N
+        jMenu4.add(jMenuItem10);
+
+        menuBar.add(jMenu4);
+
         helpMenu.setText(resourceMap.getString("helpMenu.text")); // NOI18N
 
         aboutMenuItem.setAction(actionMap.get("showAboutBox")); // NOI18N
+        aboutMenuItem.setIcon(resourceMap.getIcon("aboutMenuItem.icon")); // NOI18N
+        aboutMenuItem.setText(resourceMap.getString("aboutMenuItem.text")); // NOI18N
         aboutMenuItem.setName("aboutMenuItem"); // NOI18N
         helpMenu.add(aboutMenuItem);
 
@@ -280,12 +295,6 @@ public class RegistroControlView extends FrameView {
         setStatusBar(statusPanel);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-
-        cambiarPanelPrincipal(new PanelVinculacion(this));
-        
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
-
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
 
        cambiarPanelPrincipal(new PanelListaHorarios(this));
@@ -304,17 +313,22 @@ public class RegistroControlView extends FrameView {
         cambiarPanelPrincipal(new PanelTurnos(this));
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        cambiarPanelPrincipal(new PanelVinculacion(this));
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem13;
+    private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem14;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem7;
+    private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JPanel mainPanel;
