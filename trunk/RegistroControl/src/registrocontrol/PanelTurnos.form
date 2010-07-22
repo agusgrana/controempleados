@@ -105,7 +105,7 @@
                               <EmptySpace min="-2" max="-2" attributes="0"/>
                               <Component id="jPanel3" max="32767" attributes="0"/>
                           </Group>
-                          <Component id="jSeparator1" alignment="0" pref="536" max="32767" attributes="0"/>
+                          <Component id="jSeparator1" alignment="0" pref="550" max="32767" attributes="0"/>
                           <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
@@ -178,7 +178,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jScrollPane2" alignment="0" pref="178" max="32767" attributes="0"/>
+                              <Component id="jScrollPane2" alignment="0" pref="181" max="32767" attributes="0"/>
                               <Component id="labelEmpleadosDisp" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
@@ -242,9 +242,9 @@
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="jScrollPane3" alignment="0" pref="189" max="32767" attributes="0"/>
+                              <Component id="jScrollPane3" alignment="0" pref="192" max="32767" attributes="0"/>
                               <Component id="labelEmpleadosAct" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="campoListaTurnos" alignment="0" pref="189" max="32767" attributes="0"/>
+                              <Component id="campoListaTurnos" alignment="0" pref="192" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
@@ -307,6 +307,7 @@
             </Container>
             <Component class="javax.swing.JButton" name="jButton1">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" resourceKey="jButton1.icon"/>
                 <Property name="text" type="java.lang.String" resourceKey="jButton1.text"/>
                 <Property name="toolTipText" type="java.lang.String" resourceKey="jButton1.toolTipText"/>
                 <Property name="name" type="java.lang.String" value="jButton1" noResource="true"/>
@@ -317,8 +318,10 @@
             </Component>
             <Component class="javax.swing.JButton" name="jButton2">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" resourceKey="jButton2.icon"/>
                 <Property name="text" type="java.lang.String" resourceKey="jButton2.text"/>
                 <Property name="toolTipText" type="java.lang.String" resourceKey="jButton2.toolTipText"/>
+                <Property name="actionCommand" type="java.lang.String" resourceKey="jButton2.actionCommand"/>
                 <Property name="name" type="java.lang.String" value="jButton2" noResource="true"/>
               </Properties>
               <Events>
@@ -327,6 +330,7 @@
             </Component>
             <Component class="javax.swing.JButton" name="jButton3">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" resourceKey="jButton3.icon"/>
                 <Property name="text" type="java.lang.String" resourceKey="jButton3.text"/>
                 <Property name="toolTipText" type="java.lang.String" resourceKey="jButton3.toolTipText"/>
                 <Property name="name" type="java.lang.String" value="jButton3" noResource="true"/>
@@ -337,6 +341,7 @@
             </Component>
             <Component class="javax.swing.JButton" name="jButton4">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" resourceKey="jButton4.icon"/>
                 <Property name="text" type="java.lang.String" resourceKey="jButton4.text"/>
                 <Property name="toolTipText" type="java.lang.String" resourceKey="jButton4.toolTipText"/>
                 <Property name="name" type="java.lang.String" value="jButton4" noResource="true"/>
