@@ -110,7 +110,7 @@ public class PanelTurnos extends javax.swing.JPanel {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)
                     .addComponent(labelEmpleadosDisp))
                 .addContainerGap())
         );
@@ -149,9 +149,9 @@ public class PanelTurnos extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE)
                     .addComponent(labelEmpleadosAct, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(campoListaTurnos, javax.swing.GroupLayout.Alignment.LEADING, 0, 189, Short.MAX_VALUE))
+                    .addComponent(campoListaTurnos, javax.swing.GroupLayout.Alignment.LEADING, 0, 192, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -164,6 +164,7 @@ public class PanelTurnos extends javax.swing.JPanel {
                 .addComponent(labelEmpleadosAct))
         );
 
+        jButton1.setIcon(resourceMap.getIcon("jButton1.icon")); // NOI18N
         jButton1.setText(resourceMap.getString("jButton1.text")); // NOI18N
         jButton1.setToolTipText(resourceMap.getString("jButton1.toolTipText")); // NOI18N
         jButton1.setName("jButton1"); // NOI18N
@@ -173,8 +174,10 @@ public class PanelTurnos extends javax.swing.JPanel {
             }
         });
 
+        jButton2.setIcon(resourceMap.getIcon("jButton2.icon")); // NOI18N
         jButton2.setText(resourceMap.getString("jButton2.text")); // NOI18N
         jButton2.setToolTipText(resourceMap.getString("jButton2.toolTipText")); // NOI18N
+        jButton2.setActionCommand(resourceMap.getString("jButton2.actionCommand")); // NOI18N
         jButton2.setName("jButton2"); // NOI18N
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -182,6 +185,7 @@ public class PanelTurnos extends javax.swing.JPanel {
             }
         });
 
+        jButton3.setIcon(resourceMap.getIcon("jButton3.icon")); // NOI18N
         jButton3.setText(resourceMap.getString("jButton3.text")); // NOI18N
         jButton3.setToolTipText(resourceMap.getString("jButton3.toolTipText")); // NOI18N
         jButton3.setName("jButton3"); // NOI18N
@@ -191,6 +195,7 @@ public class PanelTurnos extends javax.swing.JPanel {
             }
         });
 
+        jButton4.setIcon(resourceMap.getIcon("jButton4.icon")); // NOI18N
         jButton4.setText(resourceMap.getString("jButton4.text")); // NOI18N
         jButton4.setToolTipText(resourceMap.getString("jButton4.toolTipText")); // NOI18N
         jButton4.setName("jButton4"); // NOI18N
@@ -223,7 +228,7 @@ public class PanelTurnos extends javax.swing.JPanel {
                             .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 93, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 536, Short.MAX_VALUE)
+                    .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 550, Short.MAX_VALUE)
                     .addComponent(jLabel1))
                 .addContainerGap())
         );
