@@ -7,17 +7,16 @@ package registrocontrol.clases;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -47,8 +46,9 @@ public class Registro implements Serializable {
     @Column(name = "horaSalida")
     @Temporal(TemporalType.TIMESTAMP)
     private Date horaSalida;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "registro")
-    private List<Turnos> turnosList;
+    @JoinColumn(name = "turno", referencedColumnName = "idTurnos")
+    @ManyToOne(optional = false)
+    private Turnos turnos;
 
     public Registro() {
     }
@@ -86,12 +86,12 @@ public class Registro implements Serializable {
         this.horaSalida = horaSalida;
     }
 
-    public List<Turnos> getTurnosList() {
-        return turnosList;
+    public Turnos getTurnos() {
+        return turnos;
     }
 
-    public void setTurnosList(List<Turnos> turnosList) {
-        this.turnosList = turnosList;
+    public void setTurnos(Turnos turnos) {
+        this.turnos = turnos;
     }
 
     @Override
@@ -116,7 +116,7 @@ public class Registro implements Serializable {
 
     @Override
     public String toString() {
-        return "clases.Registro[idRegistro=" + idRegistro + "]";
+        return "registrocontrol.clases.Registro[idRegistro=" + idRegistro + "]";
     }
 
 }

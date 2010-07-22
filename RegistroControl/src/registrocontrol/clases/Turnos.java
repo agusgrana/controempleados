@@ -45,9 +45,6 @@ public class Turnos implements Serializable {
     @JoinColumn(name = "Empleado", referencedColumnName = "idEmpleado")
     @ManyToOne(optional = false)
     private Empleado empleado;
-    @JoinColumn(name = "Registro", referencedColumnName = "idRegistro")
-    @ManyToOne(optional = false)
-    private Registro registro;
     @JoinColumn(name = "Horario", referencedColumnName = "idHorarios")
     @ManyToOne(optional = false)
     private Horario horario;
@@ -88,14 +85,6 @@ public class Turnos implements Serializable {
         this.empleado = empleado;
     }
 
-    public Registro getRegistro() {
-        return registro;
-    }
-
-    public void setRegistro(Registro registro) {
-        this.registro = registro;
-    }
-
     public Horario getHorario() {
         return horario;
     }
@@ -126,7 +115,7 @@ public class Turnos implements Serializable {
 
     @Override
     public String toString() {
-        return "clases.Turnos[idTurnos=" + idTurnos + "]";
+        return "registrocontrol.clases.Turnos[idTurnos=" + idTurnos + "]";
     }
 
 }

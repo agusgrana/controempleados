@@ -14,6 +14,9 @@
           <ComponentRef name="entityManager"/>
         </Property>
       </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="entityManager.createNamedQuery(&quot;Empleado.findAllActivo&quot;)"/>
+      </AuxValues>
     </Component>
     <Component class="java.util.List" name="empleadoList">
       <Properties>
@@ -42,6 +45,19 @@
       </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;registrocontrol.clases.Horario&gt;"/>
+      </AuxValues>
+    </Component>
+    <Component class="java.util.List" name="meses">
+      <Properties>
+        <Property name="observable" type="boolean" value="true"/>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="getMeses()"/>
+      </AuxValues>
+    </Component>
+    <Component class="java.util.List" name="anhos">
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="getAnhos()"/>
       </AuxValues>
     </Component>
   </NonVisualComponents>
@@ -106,17 +122,27 @@
                               <Component id="jPanel3" max="32767" attributes="0"/>
                           </Group>
                           <Component id="jSeparator1" alignment="0" pref="550" max="32767" attributes="0"/>
-                          <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="campoAnho" min="-2" pref="68" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="campoMeses" min="-2" pref="133" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
-                      <EmptySpace min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="campoAnho" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="campoMeses" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Component id="jSeparator1" min="-2" pref="10" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -188,7 +214,7 @@
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
-                          <Component id="jScrollPane2" pref="337" max="32767" attributes="0"/>
+                          <Component id="jScrollPane2" pref="331" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="labelEmpleadosDisp" min="-2" max="-2" attributes="0"/>
                       </Group>
@@ -255,7 +281,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="campoListaTurnos" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jScrollPane3" pref="311" max="32767" attributes="0"/>
+                          <Component id="jScrollPane3" pref="305" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="labelEmpleadosAct" min="-2" max="-2" attributes="0"/>
                       </Group>
@@ -359,6 +385,25 @@
               <Properties>
                 <Property name="name" type="java.lang.String" value="jSeparator3" noResource="true"/>
               </Properties>
+            </Component>
+            <Component class="javax.swing.JComboBox" name="campoMeses">
+              <Properties>
+                <Property name="name" type="java.lang.String" value="campoMeses" noResource="true"/>
+              </Properties>
+              <BindingProperties>
+                <BindingProperty name="elements" source="meses" target="campoMeses" targetPath="elements" updateStrategy="0" immediately="false"/>
+              </BindingProperties>
+            </Component>
+            <Component class="javax.swing.JComboBox" name="campoAnho">
+              <Properties>
+                <Property name="name" type="java.lang.String" value="campoAnho" noResource="true"/>
+              </Properties>
+              <BindingProperties>
+                <BindingProperty name="elements" source="anhos" target="campoAnho" targetPath="elements" updateStrategy="0" immediately="false"/>
+              </BindingProperties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="campoAnhoActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
