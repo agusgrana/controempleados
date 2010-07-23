@@ -310,7 +310,7 @@ public class RegistroControlView extends FrameView {
     }//GEN-LAST:event_jMenuItem14ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-        cambiarPanelPrincipal(new PanelTurnos(this));
+        cambiarPanelPrincipal(new PanelListadoTurnos(this));
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
