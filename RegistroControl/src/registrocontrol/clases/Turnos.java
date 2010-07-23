@@ -33,7 +33,9 @@ import javax.persistence.Transient;
 @NamedQueries({
     @NamedQuery(name = "Turnos.findAll", query = "SELECT t FROM Turnos t"),
     @NamedQuery(name = "Turnos.borrar", query = "DELETE FROM Turnos t WHERE t.fecha = :fecha AND t.horario = :horario"),
+    @NamedQuery(name = "Turnos.borrar", query = "DELETE FROM Turnos t WHERE t.fecha = :fecha AND t.horario = :horario"),
     @NamedQuery(name = "Turnos.findByIdTurnos", query = "SELECT t FROM Turnos t WHERE t.idTurnos = :idTurnos"),
+    @NamedQuery(name = "Turnos.porFechaHorario", query = "SELECT t FROM Turnos t WHERE t.fecha = :fecha AND t.horario = :horario"),
     @NamedQuery(name = "Turnos.findByFecha", query = "SELECT t FROM Turnos t WHERE t.fecha = :fecha")})
 public class Turnos implements Serializable {
     @Transient
