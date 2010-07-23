@@ -259,18 +259,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.persistence.EntityManager entityManager;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JPanel jPanel2;
     public javax.swing.JPanel jPanel3;
-    private javax.swing.JLabel labelApellido;
     public javax.swing.JLabel labelApellido1;
-    private javax.swing.JLabel labelFoto;
     public javax.swing.JLabel labelFoto1;
     public javax.swing.JLabel labelMensaje;
-    private javax.swing.JLabel labelNombre;
     public javax.swing.JLabel labelNombre1;
     private javax.swing.JLabel labelReloj;
     private javax.swing.JPanel panelContenedorHuella;
