@@ -12,6 +12,7 @@
     <class>registrocontrol.clases.Historialaboral</class>
     <class>registrocontrol.clases.Empleado</class>
     <class>registrocontrol.clases.Vinculacion</class>
+    <class>registrocontrol.clases.Turnosvista</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/EMPLEADITOS"/>
       <property name="javax.persistence.jdbc.password" value=""/>

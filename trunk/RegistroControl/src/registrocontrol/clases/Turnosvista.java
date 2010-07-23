@@ -5,15 +5,12 @@
 
 package registrocontrol.clases;
 
-import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -29,20 +26,20 @@ import javax.persistence.Transient;
  * @author gurzaf
  */
 @Entity
-@Table(name = "turnos")
+@Table(name = "turnosvista")
 @NamedQueries({
-    @NamedQuery(name = "Turnos.findAll", query = "SELECT t FROM Turnos t"),
-    @NamedQuery(name = "Turnos.borrar", query = "DELETE FROM Turnos t WHERE t.fecha = :fecha AND t.horario = :horario"),
-    @NamedQuery(name = "Turnos.findByIdTurnos", query = "SELECT t FROM Turnos t WHERE t.idTurnos = :idTurnos"),
-    @NamedQuery(name = "Turnos.findByFecha", query = "SELECT t FROM Turnos t WHERE t.fecha = :fecha")})
-public class Turnos implements Serializable {
+    @NamedQuery(name = "Turnosvista.findAll", query = "SELECT t FROM Turnosvista t"),
+    @NamedQuery(name = "Turnosvista.findByIdTurnos", query = "SELECT t FROM Turnosvista t WHERE t.idTurnos = :idTurnos"),
+    @NamedQuery(name = "Turnosvista.findByHorario", query = "SELECT t FROM Turnosvista t WHERE t.horario = :horario"),
+    @NamedQuery(name = "Turnosvista.findByEmpleado", query = "SELECT t FROM Turnosvista t WHERE t.empleado = :empleado"),
+    @NamedQuery(name = "Turnosvista.findByFecha", query = "SELECT t FROM Turnosvista t WHERE t.fecha = :fecha")})
+public class Turnosvista implements Serializable {
     @Transient
     private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
     private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "idTurnos")
+    @Id
     private Integer idTurnos;
     @Basic(optional = false)
     @Column(name = "Fecha")
@@ -55,14 +52,14 @@ public class Turnos implements Serializable {
     @ManyToOne(optional = false)
     private Horario horario;
 
-    public Turnos() {
+    public Turnosvista() {
     }
 
-    public Turnos(Integer idTurnos) {
+    public Turnosvista(Integer idTurnos) {
         this.idTurnos = idTurnos;
     }
 
-    public Turnos(Integer idTurnos, Date fecha) {
+    public Turnosvista(Integer idTurnos, Date fecha) {
         this.idTurnos = idTurnos;
         this.fecha = fecha;
     }
@@ -106,38 +103,4 @@ public class Turnos implements Serializable {
         this.horario = horario;
         changeSupport.firePropertyChange("horario", oldHorario, horario);
     }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (idTurnos != null ? idTurnos.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Turnos)) {
-            return false;
-        }
-        Turnos other = (Turnos) object;
-        if ((this.idTurnos == null && other.idTurnos != null) || (this.idTurnos != null && !this.idTurnos.equals(other.idTurnos))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "registrocontrol.clases.Turnos[idTurnos=" + idTurnos + "]";
-    }
-
-    public void addPropertyChangeListener(PropertyChangeListener listener) {
-        changeSupport.addPropertyChangeListener(listener);
-    }
-
-    public void removePropertyChangeListener(PropertyChangeListener listener) {
-        changeSupport.removePropertyChangeListener(listener);
-    }
-
 }
