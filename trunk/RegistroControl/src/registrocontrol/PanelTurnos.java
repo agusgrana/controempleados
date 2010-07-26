@@ -383,6 +383,7 @@ public class PanelTurnos extends javax.swing.JPanel {
                 fechaTurno.set(Calendar.MONTH, cal.get(Calendar.MONTH));
                 break;
             }
+            fechaTurno.set(Calendar.DATE, 1);
         }
         for(int i=0; i<listas.size(); i++){
             List<Empleado> listica = listas.get(i);
