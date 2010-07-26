@@ -146,15 +146,17 @@ public class Finger implements IStatusEventListener, IImageEventListener, IFinge
                 ventanaPrincipal.labelFoto1.setIcon(new ImageIcon(foto));
                 ventanaPrincipal.labelMensaje.setText("");
                 ventanaPrincipal.jPanel3.setVisible(true);
-                registrar(empleado,entityManager);
+                entityManager.getTransaction().commit();
+                registrar(empleado);
             }else{
                 ventanaPrincipal.labelMensaje.setText("No se identifico el empleado Intente de nuevo");
                 ventanaPrincipal.labelApellido1.setText("");
                 ventanaPrincipal.labelNombre1.setText("");
                 ventanaPrincipal.labelFoto1.setIcon(null);
                 ventanaPrincipal.jPanel3.setVisible(false);
+                entityManager.getTransaction().commit();
             }
-            entityManager.getTransaction().commit();
+            
             
     }
 
@@ -216,9 +218,10 @@ public class Finger implements IStatusEventListener, IImageEventListener, IFinge
         return false;
     }
 
-    private void registrar(Empleado empleado,EntityManager entityManager){
+    private void registrar(Empleado empleado){
         Calendar cal = Calendar.getInstance();
         cal.set(Calendar.DATE, 1);
+        EntityManager entityManager = ventanaPrincipal.getEntityManager();
         Query q = entityManager.createNamedQuery("Turnos.findByFechaEmpleado");
         q.setParameter("fecha", cal.getTime());
         q.setParameter("empleado", empleado);
