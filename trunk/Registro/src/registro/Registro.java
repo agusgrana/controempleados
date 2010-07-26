@@ -31,7 +31,7 @@ import javax.persistence.TemporalType;
     @NamedQuery(name = "Registro.findAll", query = "SELECT r FROM Registro r"),
     @NamedQuery(name = "Registro.findByIdRegistro", query = "SELECT r FROM Registro r WHERE r.idRegistro = :idRegistro"),
     @NamedQuery(name = "Registro.findByHoraEntrada", query = "SELECT r FROM Registro r WHERE r.horaEntrada = :horaEntrada"),
-    @NamedQuery(name = "Registro.findByTurnoFecha", query = "SELECT r FROM Registro r WHERE r.turnos = :turnos AND (r.)"),
+    /*@NamedQuery(name = "Registro.findByTurnoFecha", query = "SELECT r FROM Registro r WHERE r.turnos = :turnos AND (r.)"),*/
     @NamedQuery(name = "Registro.findByHoraSalida", query = "SELECT r FROM Registro r WHERE r.horaSalida = :horaSalida")})
 public class Registro implements Serializable {
     private static final long serialVersionUID = 1L;
