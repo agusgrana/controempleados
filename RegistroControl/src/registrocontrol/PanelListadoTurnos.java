@@ -77,7 +77,9 @@ public class PanelListadoTurnos extends javax.swing.JPanel {
         jToolBar1.setRollover(true);
         jToolBar1.setName("jToolBar1"); // NOI18N
 
+        jButton1.setIcon(resourceMap.getIcon("jButton1.icon")); // NOI18N
         jButton1.setText(resourceMap.getString("jButton1.text")); // NOI18N
+        jButton1.setToolTipText(resourceMap.getString("jButton1.toolTipText")); // NOI18N
         jButton1.setFocusable(false);
         jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton1.setName("jButton1"); // NOI18N
@@ -89,7 +91,9 @@ public class PanelListadoTurnos extends javax.swing.JPanel {
         });
         jToolBar1.add(jButton1);
 
+        jButton2.setIcon(resourceMap.getIcon("jButton2.icon")); // NOI18N
         jButton2.setText(resourceMap.getString("jButton2.text")); // NOI18N
+        jButton2.setToolTipText(resourceMap.getString("jButton2.toolTipText")); // NOI18N
         jButton2.setFocusable(false);
         jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton2.setName("jButton2"); // NOI18N
@@ -133,18 +137,18 @@ public class PanelListadoTurnos extends javax.swing.JPanel {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 343, Short.MAX_VALUE)
+            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 751, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addContainerGap(248, Short.MAX_VALUE))
+                .addContainerGap(656, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 323, Short.MAX_VALUE)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 731, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 317, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 725, Short.MAX_VALUE)
                 .addGap(16, 16, 16))
         );
         jPanel1Layout.setVerticalGroup(
@@ -156,7 +160,7 @@ public class PanelListadoTurnos extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 239, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 410, Short.MAX_VALUE)
                 .addContainerGap())
         );
 

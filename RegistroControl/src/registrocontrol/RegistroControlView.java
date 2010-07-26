@@ -107,6 +107,7 @@ public class RegistroControlView extends FrameView {
     private void initComponents() {
 
         mainPanel = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
         menuBar = new javax.swing.JMenuBar();
         jMenu3 = new javax.swing.JMenu();
         javax.swing.JMenuItem exitMenuItem = new javax.swing.JMenuItem();
@@ -132,20 +133,15 @@ public class RegistroControlView extends FrameView {
 
         mainPanel.setName("mainPanel"); // NOI18N
 
-        javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
-        mainPanel.setLayout(mainPanelLayout);
-        mainPanelLayout.setHorizontalGroup(
-            mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        mainPanelLayout.setVerticalGroup(
-            mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 249, Short.MAX_VALUE)
-        );
+        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(registrocontrol.RegistroControlApp.class).getContext().getResourceMap(RegistroControlView.class);
+        jLabel1.setIcon(resourceMap.getIcon("jLabel1.icon")); // NOI18N
+        jLabel1.setText(resourceMap.getString("jLabel1.text")); // NOI18N
+        jLabel1.setMinimumSize(new java.awt.Dimension(600, 600));
+        jLabel1.setName("jLabel1"); // NOI18N
+        mainPanel.add(jLabel1);
 
         menuBar.setName("menuBar"); // NOI18N
 
-        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(registrocontrol.RegistroControlApp.class).getContext().getResourceMap(RegistroControlView.class);
         jMenu3.setText(resourceMap.getString("jMenu3.text")); // NOI18N
         jMenu3.setName("jMenu3"); // NOI18N
 
@@ -268,11 +264,11 @@ public class RegistroControlView extends FrameView {
         statusPanel.setLayout(statusPanelLayout);
         statusPanelLayout.setHorizontalGroup(
             statusPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(statusPanelSeparator, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+            .addComponent(statusPanelSeparator, javax.swing.GroupLayout.DEFAULT_SIZE, 725, Short.MAX_VALUE)
             .addGroup(statusPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(statusMessageLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 230, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 555, Short.MAX_VALUE)
                 .addComponent(progressBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(statusAnimationLabel)
@@ -318,6 +314,7 @@ public class RegistroControlView extends FrameView {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
