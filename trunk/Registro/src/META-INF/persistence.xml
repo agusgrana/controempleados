@@ -5,6 +5,10 @@
     <class>registro.Empleado</class>
     <class>registro.Vinculacion</class>
     <class>registro.Huellas</class>
+    <class>registro.Turnos</class>
+    <class>registro.Horario</class>
+    <class>registro.Registro</class>
+    <class>registro.Anomalia</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/EMPLEADITOS"/>
       <property name="javax.persistence.jdbc.password" value=""/>
