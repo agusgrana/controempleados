@@ -79,7 +79,7 @@ public class Empleado implements Serializable {
     @ManyToOne(optional = false)
     private Vinculacion vinculacion;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "empleado")
-    private List<Huellas> huellasList;
+    private List<Anomalia> anomaliaList;
 
     public Empleado() {
     }
@@ -189,12 +189,12 @@ public class Empleado implements Serializable {
         this.vinculacion = vinculacion;
     }
 
-    public List<Huellas> getHuellasList() {
-        return huellasList;
+    public List<Anomalia> getAnomaliaList() {
+        return anomaliaList;
     }
 
-    public void setHuellasList(List<Huellas> huellasList) {
-        this.huellasList = huellasList;
+    public void setAnomaliaList(List<Anomalia> anomaliaList) {
+        this.anomaliaList = anomaliaList;
     }
 
     @Override

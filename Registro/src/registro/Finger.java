@@ -18,6 +18,7 @@ import java.awt.Image;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
+import java.util.Calendar;
 import java.util.List;
 import javax.imageio.ImageIO;
 import javax.persistence.EntityManager;
@@ -145,6 +146,7 @@ public class Finger implements IStatusEventListener, IImageEventListener, IFinge
                 ventanaPrincipal.labelFoto1.setIcon(new ImageIcon(foto));
                 ventanaPrincipal.labelMensaje.setText("");
                 ventanaPrincipal.jPanel3.setVisible(true);
+                registrar(empleado,entityManager);
             }else{
                 ventanaPrincipal.labelMensaje.setText("No se identifico el empleado Intente de nuevo");
                 ventanaPrincipal.labelApellido1.setText("");
@@ -153,6 +155,7 @@ public class Finger implements IStatusEventListener, IImageEventListener, IFinge
                 ventanaPrincipal.jPanel3.setVisible(false);
             }
             entityManager.getTransaction().commit();
+            
     }
 
     public void onFingerDown(String idSensor) {
@@ -213,5 +216,22 @@ public class Finger implements IStatusEventListener, IImageEventListener, IFinge
         return false;
     }
 
+    private void registrar(Empleado empleado,EntityManager entityManager){
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.DATE, 1);
+        Query q = entityManager.createNamedQuery("Turnos.findByFechaEmpleado");
+        q.setParameter("fecha", cal.getTime());
+        q.setParameter("empleado", empleado);
+        Turnos turno = (Turnos) q.getSingleResult();
+        if(turno==null)
+            ventanaPrincipal.labelMensaje.setText("No se encontro turno asignado para este empleado");
+        else{
+//            Horario h = turno.getHorario();
+//            q = entityManager.createNamedQuery("Registro.findByTurno");
+//            q.setParameter("turnos", turno);
+//            Registro registro = q.getSingleResult();
+        }
+        entityManager.getTransaction().commit();
+    }
 
 }
