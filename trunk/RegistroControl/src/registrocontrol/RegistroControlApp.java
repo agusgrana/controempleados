@@ -4,7 +4,9 @@
 
 package registrocontrol;
 
+import java.awt.Image;
 import java.io.File;
+import javax.swing.ImageIcon;
 import org.jdesktop.application.Application;
 import org.jdesktop.application.SingleFrameApplication;
 import registrocontrol.lib.Finger;
@@ -27,6 +29,7 @@ public class RegistroControlApp extends SingleFrameApplication {
      * builder, so this additional configuration is not needed.
      */
     @Override protected void configureWindow(java.awt.Window root) {
+        root.setIconImage(new ImageIcon(getClass().getResource("resources/icono.png")).getImage());
     }
 
     /**
