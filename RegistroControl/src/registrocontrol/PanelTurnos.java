@@ -27,10 +27,7 @@ import registrocontrol.clases.Horario;
 import registrocontrol.clases.Turnos;
 import registrocontrol.lib.Mensajes;
 
-/**
- *
- * @author gurzaf
- */
+
 public class PanelTurnos extends javax.swing.JPanel {
 
     RegistroControlView registroControlView;

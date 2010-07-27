@@ -29,10 +29,7 @@ import registrocontrol.clases.Empleado;
 import registrocontrol.clases.Familiar;
 import registrocontrol.lib.Mensajes;
 import registrocontrol.lib.Valida;
-/**
- *
- * @author GeRmAn
- */
+
 public class PanelFamiliar extends javax.swing.JPanel {
 
     private RegistroControlView registroControlView;

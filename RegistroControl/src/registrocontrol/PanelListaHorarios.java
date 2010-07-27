@@ -23,10 +23,7 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellRenderer;
 
-/**
- *
- * @author GeRmAn
- */
+
 public class PanelListaHorarios extends javax.swing.JPanel {
 
     RegistroControlView registroControlView;

@@ -11,10 +11,6 @@
 
 package registrocontrol;
 
-/**
- *
- * @author GeRmAn
- */
 public class PanelSalario extends javax.swing.JPanel {
 
     /** Creates new form PanelSalario */
