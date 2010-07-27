@@ -23,10 +23,6 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-/**
- *
- * @author gurzaf
- */
 @Entity
 @Table(name = "empleado")
 @NamedQueries({

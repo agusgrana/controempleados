@@ -25,10 +25,7 @@ import javax.swing.border.BevelBorder;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 
-/**
- *
- * @author gurzaf
- */
+
 public class VentanaPrincipal extends javax.swing.JFrame {
 
     //objeto usado para realizar todas las operaciones relacionadas al Fingerprint-SDK
