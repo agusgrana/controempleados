@@ -36,10 +36,7 @@ import javax.swing.filechooser.FileFilter;
 import registrocontrol.lib.Mensajes;
 import registrocontrol.lib.Valida;
 
-/**
- *
- * @author gurzaf
- */
+
 public class PanelNuevoEmpleado extends javax.swing.JPanel {
 
     private RegistroControlView registroControlView;

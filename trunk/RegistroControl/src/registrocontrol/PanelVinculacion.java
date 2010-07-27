@@ -23,10 +23,7 @@ import registrocontrol.lib.Mensajes;
 
 
 
-/**
- *
- * @author GeRmAn
- */
+
 public class PanelVinculacion extends javax.swing.JPanel {
 
     RegistroControlView registroControlView;

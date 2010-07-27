@@ -22,10 +22,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellRenderer;
 import registrocontrol.clases.Empleado;
 
-/**
- *
- * @author gurzaf
- */
+
 public class PanelListadoTurnosEmpleados extends javax.swing.JPanel {
 
     private RegistroControlView registroControlView;
