@@ -19,10 +19,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-/**
- *
- * @author gurzaf
- */
+
 @Entity
 @Table(name = "vinculacion")
 @NamedQueries({
